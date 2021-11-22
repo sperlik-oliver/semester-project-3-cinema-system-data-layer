@@ -73,32 +73,32 @@ public class User {
     public String getPassword() { return Password; }
     public void setPassword(String Password) {this.Password = Password;}
 
-    @Column(name = "Street", nullable = false)
+    @Column(name = "street", nullable = false)
     public String getStreet() { return Street; }
     public void setStreet(String Street) {this.Street = Street;}
 
-    @Column(name = "Postcode", nullable = false)
+    @Column(name = "postcode", nullable = false)
     public String getPostcode() {
         return Postcode;
     }
-    public void setPostcode(String postcode) {
-        Postcode = postcode;
+    public void setPostcode(String Postcode) {
+        this.Postcode = Postcode;
     }
 
-    @Column(name = "City", nullable = false)
+    @Column(name = "city", nullable = false)
     public String getCity() {
         return City;
     }
     public void setCity(String city) {
-        City = city;
+        this.City = city;
     }
 
-    @Column(name = "Country", nullable = false)
+    @Column(name = "country", nullable = false)
     public String getCountry() {
         return Country;
     }
-    public void setCountry(String country) {
-        Country = country;
+    public void setCountry(String Country) {
+        this.Country = Country;
     }
 
 
