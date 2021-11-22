@@ -14,7 +14,7 @@ public class Employee {
 	private long id;
 	private String firstName;
 	private String lastName;
-	private String emailId;
+	private String email;
 	private String password;
 	private String street;
 	
@@ -22,10 +22,10 @@ public class Employee {
 		
 	}
 	
-	public Employee(String firstName, String lastName, String emailId, String password, String street) {
+	public Employee(String firstName, String lastName, String email, String password, String street) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.emailId = emailId;
+		this.email = email;
 		this.password = password;
 		this.street = street;
 	}
@@ -56,11 +56,11 @@ public class Employee {
 	}
 	
 	@Column(name = "email_address", nullable = false)
-	public String getEmailId() {
-		return emailId;
+	public String getEmail() {
+		return email;
 	}
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Column(name = "password", nullable = false)
@@ -81,7 +81,7 @@ public class Employee {
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + emailId + "password=" + password + "street=" + street + "]";
+		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "password=" + password + "street=" + street + "]";
 	}
 
 }
