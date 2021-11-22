@@ -23,17 +23,17 @@ import crud.packages.exception.ResourceNotFoundException;
 import crud.packages.model.User;
 
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api")
 public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 
-	@GetMapping("/employees")
+	@GetMapping("/users")
 	public List<User> getAllUsers() {
 		return userRepository.findAll();
 	}
 
-	@GetMapping("/employees/{id}")
+	@GetMapping("/user/{id}")
 	public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long userId)
 			throws ResourceNotFoundException {
 		User user = userRepository.findById(userId)
@@ -41,12 +41,12 @@ public class UserController {
 		return ResponseEntity.ok().body(user);
 	}
 
-	@PostMapping("/employees")
+	@PostMapping("/users/register")
 	public User createUser(@Valid @RequestBody User user) {
 		return userRepository.save(user);
 	}
 
-	@PutMapping("/employees/{id}")
+	@PutMapping("/users/edit/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long userId,
 			@Valid @RequestBody User userDetails) throws ResourceNotFoundException {
 		User user = userRepository.findById(userId)
@@ -59,7 +59,7 @@ public class UserController {
 		return ResponseEntity.ok(updatedUser);
 	}
 
-	@DeleteMapping("/employees/{id}")
+	@DeleteMapping("/users/delete/{id}")
 	public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long userId)
 			throws ResourceNotFoundException {
 		User user = userRepository.findById(userId)
