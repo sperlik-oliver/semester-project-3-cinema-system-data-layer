@@ -18,21 +18,21 @@ public class Employee {
 	private String password;
 	private String street;
 	private String postcode;
-	private String city;
+	private String settlement;
 	private String country;
 	
 	public Employee() {
 		
 	}
 	
-	public Employee(String firstName, String lastName, String email, String password, String street, String postcode, String city, String country) {
+	public Employee(String firstName, String lastName, String email, String password, String street, String postcode, String settlement, String country) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.street = street;
 		this.postcode = postcode;
-		this.city = city;
+		this.settlement = settlement;
 		this.country = country;
 	}
 	
@@ -102,18 +102,18 @@ public class Employee {
 		this.country = country;
 	}
 
-	@Column(name = "city", nullable = false)
-	public String getCity() {
-		return city;
+	@Column(name = "settlement", nullable = false)
+	public String getSettlement() {
+		return settlement;
 	}
-	public void setCity(String City) {
-		this.city = city;
+	public void setSettlement(String settlement) {
+		this.settlement = settlement;
 	}
 
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "password=" + password + "street=" + street + "postcode=" + postcode + "city=" + city + "country=" + country + "]";
+		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "password=" + password + "street=" + street + "postcode=" + postcode + "settlement=" + settlement + "country=" + country + "]";
 	}
 
 }
