@@ -8,6 +8,7 @@ import javax.validation.Valid;
 
 import crud.packages.repository.UserRepository;
 import crud.packages.model.User;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -46,6 +47,20 @@ public class UserController {
 		return userRepository.save(user);
 	}
 
+	@PostMapping("/users/login")
+	public ResponseEntity<User> loginUser(@Valid @RequestBody User userDetails) throws ResourceNotFoundException {
+		User user = userRepository.getUserByEmail(userDetails.getEmail()); {
+			if (user != null) {
+				if (userDetails.getPassword().equals(user.getPassword())) {
+					return ResponseEntity.ok(user);
+				}
+				throw new ResourceNotFoundException("Incorrect credentails ");
+			}
+			throw new ResourceNotFoundException("User not found for this email :: " + userDetails.getEmail());
+		}
+
+	}
+
 	@PutMapping("/users/edit/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long userId,
 			@Valid @RequestBody User userDetails) throws ResourceNotFoundException {
@@ -55,6 +70,11 @@ public class UserController {
 		user.setEmail(userDetails.getEmail());
 		user.setLastName(userDetails.getLastName());
 		user.setFirstName(userDetails.getFirstName());
+		user.setPassword(userDetails.getPassword());
+		user.setStreet(userDetails.getStreet());
+		user.setPostcode(userDetails.getPostcode());
+		user.setCountry(userDetails.getCountry());
+		user.setSettlement(userDetails.getSettlement());
 		final User updatedUser = userRepository.save(user);
 		return ResponseEntity.ok(updatedUser);
 	}
