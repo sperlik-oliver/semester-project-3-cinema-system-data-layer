@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
+import crud.packages.model.Login;
 import crud.packages.repository.UserRepository;
 import crud.packages.model.User;
 import org.apache.coyote.Response;
@@ -48,15 +49,15 @@ public class UserController {
 	}
 
 	@PostMapping("/users/login")
-	public ResponseEntity<User> loginUser(@Valid @RequestBody User userDetails) throws ResourceNotFoundException {
-		User user = userRepository.getUserByEmail(userDetails.getEmail()); {
+	public ResponseEntity<User> loginUser(@Valid @RequestBody Login loginDetails) throws ResourceNotFoundException {
+		User user = userRepository.getUserByEmail(loginDetails.getEmail()); {
 			if (user != null) {
-				if (userDetails.getPassword().equals(user.getPassword())) {
+				if (loginDetails.getPassword().equals(user.getPassword())) {
 					return ResponseEntity.ok(user);
 				}
 				throw new ResourceNotFoundException("Incorrect credentails ");
 			}
-			throw new ResourceNotFoundException("User not found for this email :: " + userDetails.getEmail());
+			throw new ResourceNotFoundException("User not found for this email :: " + loginDetails.getEmail());
 		}
 
 	}
