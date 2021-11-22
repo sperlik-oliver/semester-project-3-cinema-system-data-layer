@@ -93,14 +93,7 @@ public class Employee {
 		this.postcode = postcode;
 	}
 
-//	@Column(name = "city", nullable = false)
-//	public String getCity() {
-//		return city;
-//	}
-//	public void setCity(String City) {
-//		this.city = city;
-//	}
-//
+
 	@Column(name = "country", nullable = false)
 	public String getCountry() {
 		return country;
@@ -108,6 +101,15 @@ public class Employee {
 	public void setCountry(String country) {
 		this.country = country;
 	}
+
+	@Column(name = "city", nullable = false)
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String City) {
+		this.city = city;
+	}
+
 
 	@Override
 	public String toString() {
