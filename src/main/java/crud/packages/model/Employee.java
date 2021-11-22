@@ -14,18 +14,26 @@ public class Employee {
 	private long id;
 	private String firstName;
 	private String lastName;
-	private String emailId;
+	private String email;
 	private String password;
+	private String street;
+	private String postcode;
+	private String city;
+	private String country;
 	
 	public Employee() {
 		
 	}
 	
-	public Employee(String firstName, String lastName, String emailId, String password) {
+	public Employee(String firstName, String lastName, String email, String password, String street, String postcode, String city, String country) {
 		this.firstName = firstName;
 		this.lastName = lastName;
-		this.emailId = emailId;
+		this.email = email;
 		this.password = password;
+		this.street = street;
+		this.postcode = postcode;
+		this.city = city;
+		this.country = country;
 	}
 	
 	@Id
@@ -54,21 +62,53 @@ public class Employee {
 	}
 	
 	@Column(name = "email_address", nullable = false)
-	public String getEmailId() {
-		return emailId;
+	public String getEmail() {
+		return email;
 	}
-	public void setEmailId(String emailId) {
-		this.emailId = emailId;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	@Column (name = "password", nullable = false)
 	public String getPassword() {return password; }
 	public void setPassword(String password) { this.password = password; }
 
+	@Column (name = "street", nullable = false)
+	public String getStreet() {
+		return street;
+	}
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
+	@Column (name = "postcode", nullable = false)
+	public String getPostcode() {
+		return postcode;
+	}
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+
+	@Column (name = "city", nullable = false)
+	public String getCity() {
+		return city;
+	}
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	@Column (name = "country", nullable = false)
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId
-				+ "password=" + password + "]";
+		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email
+				+ "password=" + password + "street=" + street + "postcode=" + postcode + "city=" + city + "country=" + country + "]";
 	}
 
 }
