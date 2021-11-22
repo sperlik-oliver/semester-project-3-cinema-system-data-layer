@@ -102,11 +102,18 @@ public class User {
     }
 
 
-
     @Override
     public String toString() {
-        return "Employee [id=" + id + ", FirstName=" + FirstName + ", LastName=" + LastName + ", Email" + Email
-                + "]";
+        return "User{" +
+                "id=" + id +
+                ", FirstName='" + FirstName + '\'' +
+                ", LastName='" + LastName + '\'' +
+                ", Email='" + Email + '\'' +
+                ", Password='" + Password + '\'' +
+                ", Street='" + Street + '\'' +
+                ", Postcode='" + Postcode + '\'' +
+                ", City='" + City + '\'' +
+                ", Country='" + Country + '\'' +
+                '}';
     }
-
 }
