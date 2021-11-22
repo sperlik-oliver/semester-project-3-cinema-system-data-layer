@@ -42,7 +42,7 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @PostMapping("/users/create")
+    @PostMapping("/users")
     public User createUser(@Valid @RequestBody User user) {
         return userRepository.save(user);
     }
