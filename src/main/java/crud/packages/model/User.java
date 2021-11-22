@@ -8,8 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "employees")
-public class Employee {
+@Table(name = "users")
+public class User {
 
 	private long id;
 	private String firstName;
@@ -21,11 +21,11 @@ public class Employee {
 	private String settlement;
 	private String country;
 	
-	public Employee() {
+	public User() {
 		
 	}
 	
-	public Employee(String firstName, String lastName, String email, String password, String street, String postcode, String settlement, String country) {
+	public User(String firstName, String lastName, String email, String password, String street, String postcode, String settlement, String country) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
