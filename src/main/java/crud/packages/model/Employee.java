@@ -17,17 +17,23 @@ public class Employee {
 	private String email;
 	private String password;
 	private String street;
+	private String postcode;
+	private String city;
+	private String country;
 	
 	public Employee() {
 		
 	}
 	
-	public Employee(String firstName, String lastName, String email, String password, String street) {
+	public Employee(String firstName, String lastName, String email, String password, String street, String postcode, String city, String country) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
 		this.street = street;
+		this.postcode = postcode;
+		this.city = city;
+		this.country = country;
 	}
 	
 	@Id
@@ -79,9 +85,18 @@ public class Employee {
 		this.street = street;
 	}
 
+	@Column(name = "postcode", nullable = false)
+	public String getPostcode() {
+		return postcode;
+	}
+	public void setPostcode(String postcode) {
+		this.postcode = postcode;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "password=" + password + "street=" + street + "]";
+		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "password=" + password + "street=" + street + "postcode=" + postcode + "city=" + city + "country=" + country + "]";
 	}
 
 }
