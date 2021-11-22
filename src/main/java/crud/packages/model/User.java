@@ -61,13 +61,13 @@ public class User {
         this.LastName = LastName;
     }
 //
-//    @Column(name = "email_address", nullable = false)
-//    public String getEmail() {
-//        return Email;
-//    }
-//    public void setEmail(String Email) {
-//        this.Email = Email;
-//    }
+    @Column(name = "email_address", nullable = false)
+    public String getEmail() {
+        return Email;
+    }
+    public void setEmail(String Email) {
+        this.Email = Email;
+    }
 //
 //    @Column(name = "password", nullable = false)
 //    public String getPassword() { return Password; }
