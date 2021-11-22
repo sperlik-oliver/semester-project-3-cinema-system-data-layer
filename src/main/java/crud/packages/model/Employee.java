@@ -16,16 +16,18 @@ public class Employee {
 	private String lastName;
 	private String emailId;
 	private String password;
+	private String street;
 	
 	public Employee() {
 		
 	}
 	
-	public Employee(String firstName, String lastName, String emailId, String password) {
+	public Employee(String firstName, String lastName, String emailId, String password, String street) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.emailId = emailId;
 		this.password = password;
+		this.street = street;
 	}
 	
 	@Id
@@ -69,9 +71,17 @@ public class Employee {
 		this.password = password;
 	}
 
+	@Column(name = "street", nullable = false)
+	public String getStreet() {
+		return street;
+	}
+	public void setStreet(String street) {
+		this.street = street;
+	}
+
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + emailId + "password=" + password + "]";
+		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + emailId + "password=" + password + "street=" + street + "]";
 	}
 
 }
