@@ -1,4 +1,4 @@
-package net.guides.springboot2.springboot2jpacrudexample;
+package app.tests;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
