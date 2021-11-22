@@ -15,15 +15,17 @@ public class Employee {
 	private String firstName;
 	private String lastName;
 	private String emailId;
+	private String password;
 	
 	public Employee() {
 		
 	}
 	
-	public Employee(String firstName, String lastName, String emailId) {
+	public Employee(String firstName, String lastName, String emailId, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.emailId = emailId;
+		this.password = password;
 	}
 	
 	@Id
@@ -59,10 +61,14 @@ public class Employee {
 		this.emailId = emailId;
 	}
 
+	@Column (name = "password", nullable = false)
+	public String getPassword() {return password; }
+	public void setPassword(String password) { this.password = password; }
+
 	@Override
 	public String toString() {
 		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", emailId=" + emailId
-				+ "]";
+				+ "password=" + password + "]";
 	}
 	
 }
