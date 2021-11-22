@@ -101,13 +101,13 @@ public class Employee {
 //		this.city = city;
 //	}
 //
-//	@Column(name = "country", nullable = false)
-//	public String getCountry() {
-//		return country;
-//	}
-//	public void setCountry(String country) {
-//		this.country = country;
-//	}
+	@Column(name = "country", nullable = false)
+	public String getCountry() {
+		return country;
+	}
+	public void setCountry(String country) {
+		this.country = country;
+	}
 
 	@Override
 	public String toString() {
