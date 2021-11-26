@@ -27,7 +27,7 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(long id, String title, String description, String genre, String director, String language, int year, int length, String posterSrc) {
+    public Movie(long id, String title, String description, String genre, String director, String language, int year, int length, String posterSrc, List<Actor> actors) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -37,6 +37,7 @@ public class Movie {
         this.year = year;
         this.length = length;
         this.posterSrc = posterSrc;
+        this.actors = actors;
     }
 
     @Id

@@ -12,8 +12,9 @@ public class Actor {
 
     public Actor (){}
 
-    public Actor (String name) {
+    public Actor (String name, Movie movie) {
         this.name = name;
+        this.movie = movie;
     }
 
     @Id
@@ -26,6 +27,7 @@ public class Actor {
     public void setName(String name){this.name = name;}
 
     @ManyToOne
+    @JoinColumn(name="movie_id")
     public Movie getMovie() {
         return movie;
     }
