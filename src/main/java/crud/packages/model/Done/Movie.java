@@ -3,6 +3,7 @@ package crud.packages.model.Done;
 import crud.packages.model.Done.Actor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -19,7 +20,7 @@ public class Movie {
     private int year;
     private int length;
     private String posterSrc;
-    private List<Actor> actors;
+    private List<Actor> actors = new ArrayList<>();
 
 
 
