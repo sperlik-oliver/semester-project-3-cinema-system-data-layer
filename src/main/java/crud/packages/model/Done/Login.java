@@ -1,4 +1,4 @@
-package crud.packages.model;
+package crud.packages.model.Done;
 
 public class Login {
     private String email;
@@ -15,7 +15,6 @@ public class Login {
     public String getEmail() {
         return email;
     }
-
     public void setEmail(String email) {
         this.email = email;
     }

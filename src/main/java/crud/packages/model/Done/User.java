@@ -1,4 +1,4 @@
-package crud.packages.model;
+package crud.packages.model.Done;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -92,7 +92,6 @@ public class User {
 	public void setPostcode(String postcode) {
 		this.postcode = postcode;
 	}
-
 
 	@Column(name = "country", nullable = false)
 	public String getCountry() {

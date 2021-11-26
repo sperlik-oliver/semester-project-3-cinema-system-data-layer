@@ -6,9 +6,9 @@ import java.util.Map;
 
 import javax.validation.Valid;
 
-import crud.packages.model.Login;
+import crud.packages.model.Done.Login;
 import crud.packages.repository.UserRepository;
-import crud.packages.model.User;
+import crud.packages.model.Done.User;
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -22,33 +22,33 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import crud.packages.exception.ResourceNotFoundException;
-import crud.packages.model.User;
 
 @RestController
 @RequestMapping("/api")
 public class UserController {
+
 	@Autowired
 	private UserRepository userRepository;
 
 	@GetMapping("/users")
-	public List<User> getAllUsers() {
-		return userRepository.findAll();
+	public ResponseEntity<List<User>> getAllUsers() {
+		return ResponseEntity.ok().body(userRepository.findAll());
 	}
 
 	@GetMapping("/user/{id}")
-	public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long userId)
-			throws ResourceNotFoundException {
+	public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long userId) throws ResourceNotFoundException {
 		User user = userRepository.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
 		return ResponseEntity.ok().body(user);
 	}
 
-	@PostMapping("/users/register")
-	public User createUser(@Valid @RequestBody User user) {
-		return userRepository.save(user);
+	@PostMapping("/user/register")
+	public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
+		userRepository.save(user);
+		return ResponseEntity.ok().body(user);
 	}
 
-	@PostMapping("/users/login")
+	@PostMapping("/user/login")
 	public ResponseEntity<User> loginUser(@Valid @RequestBody Login loginDetails) throws ResourceNotFoundException {
 		User user = userRepository.getUserByEmail(loginDetails.getEmail()); {
 			if (user != null) {
@@ -62,7 +62,7 @@ public class UserController {
 
 	}
 
-	@PutMapping("/users/edit/{id}")
+	@PutMapping("/user/edit/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long userId,
 			@Valid @RequestBody User userDetails) throws ResourceNotFoundException {
 		User user = userRepository.findById(userId)
@@ -77,18 +77,14 @@ public class UserController {
 		user.setCountry(userDetails.getCountry());
 		user.setSettlement(userDetails.getSettlement());
 		final User updatedUser = userRepository.save(user);
-		return ResponseEntity.ok(updatedUser);
+		return ResponseEntity.ok().body(updatedUser);
 	}
 
-	@DeleteMapping("/users/delete/{id}")
-	public Map<String, Boolean> deleteUser(@PathVariable(value = "id") Long userId)
-			throws ResourceNotFoundException {
+	@DeleteMapping("/user/delete/{id}")
+	public ResponseEntity<Boolean> deleteUser(@PathVariable(value = "id") Long userId) throws ResourceNotFoundException {
 		User user = userRepository.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
-
 		userRepository.delete(user);
-		Map<String, Boolean> response = new HashMap<>();
-		response.put("deleted", Boolean.TRUE);
-		return response;
+		return ResponseEntity.ok().body(true);
 	}
 }
