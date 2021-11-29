@@ -39,17 +39,19 @@ public class EmployeeController {
     public ResponseEntity<Employee> editEmployee(@PathVariable (value = "id") Long employeeId, @Valid @RequestBody Employee employeeDetails) throws ResourceNotFoundException {
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow( () -> new ResourceNotFoundException("Employee not found for this :: " + employeeId));
-        employee.setEmail(employeeDetails.getEmail());
-        employee.setLastName(employeeDetails.getLastName());
         employee.setFirstName(employeeDetails.getFirstName());
+        employee.setLastName(employeeDetails.getLastName());
+        employee.setEmail(employeeDetails.getEmail());
         employee.setPassword(employeeDetails.getPassword());
+        employee.setRole(employeeDetails.getRole());
+        employee.setCpr(employeeDetails.getCpr());
         employee.setStreet(employeeDetails.getStreet());
+        employee.setCity(employeeDetails.getCity());
         employee.setPostcode(employeeDetails.getPostcode());
         employee.setCountry(employeeDetails.getCountry());
-        employee.setSettlement(employeeDetails.getSettlement());
         employee.setBirthday(employeeDetails.getBirthday());
-        employee.setCpr(employeeDetails.getCpr());
-        employee.setRole(employeeDetails.getRole());
+        employee.setBranchId(employeeDetails.getBranchId());
+
         final Employee updatedEmployee = employeeRepository.save(employee);
         return ResponseEntity.ok().body(updatedEmployee);
     }

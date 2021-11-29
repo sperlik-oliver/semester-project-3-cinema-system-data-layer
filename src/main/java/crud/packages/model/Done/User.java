@@ -7,6 +7,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
+//TODO create method to retrieve tickets purchased
+
 @Entity
 @Table(name = "users")
 public class User {
@@ -25,15 +28,11 @@ public class User {
 		
 	}
 	
-	public User(String firstName, String lastName, String email, String password, String street, String postcode, String settlement, String country) {
+	public User(String firstName, String lastName, String email, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
 		this.password = password;
-		this.street = street;
-		this.postcode = postcode;
-		this.settlement = settlement;
-		this.country = country;
 	}
 	
 	@Id
@@ -77,42 +76,11 @@ public class User {
 		this.password = password;
 	}
 
-	@Column(name = "street", nullable = false)
-	public String getStreet() {
-		return street;
-	}
-	public void setStreet(String street) {
-		this.street = street;
-	}
-
-	@Column(name = "postcode", nullable = false)
-	public String getPostcode() {
-		return postcode;
-	}
-	public void setPostcode(String postcode) {
-		this.postcode = postcode;
-	}
-
-	@Column(name = "country", nullable = false)
-	public String getCountry() {
-		return country;
-	}
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	@Column(name = "settlement", nullable = false)
-	public String getSettlement() {
-		return settlement;
-	}
-	public void setSettlement(String settlement) {
-		this.settlement = settlement;
-	}
 
 
 	@Override
 	public String toString() {
-		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "password=" + password + "street=" + street + "postcode=" + postcode + "settlement=" + settlement + "country=" + country + "]";
+		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "password=" + password + "]";
 	}
 
 }

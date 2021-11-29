@@ -1,15 +1,12 @@
 package crud.packages.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.validation.Valid;
 
-import crud.packages.model.Done.Login;
+import crud.packages.model.Entities.Login;
 import crud.packages.repository.UserRepository;
 import crud.packages.model.Done.User;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -72,10 +69,6 @@ public class UserController {
 		user.setLastName(userDetails.getLastName());
 		user.setFirstName(userDetails.getFirstName());
 		user.setPassword(userDetails.getPassword());
-		user.setStreet(userDetails.getStreet());
-		user.setPostcode(userDetails.getPostcode());
-		user.setCountry(userDetails.getCountry());
-		user.setSettlement(userDetails.getSettlement());
 		final User updatedUser = userRepository.save(user);
 		return ResponseEntity.ok().body(updatedUser);
 	}

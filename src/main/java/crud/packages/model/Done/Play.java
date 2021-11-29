@@ -1,0 +1,70 @@
+package crud.packages.model.Done;
+
+
+import javax.persistence.*;
+import java.util.Date;
+
+//TODO create method to retrieve tickets, hall and movie
+
+@Entity
+@Table(name = "plays")
+public class Play {
+
+    private long id;
+    private Date date;
+    private int timeInMinutes;
+    private int movieId;
+    private int hallId;
+
+    public Play() {
+    }
+
+    public Play(long id, Date date, int timeInMinutes, int movieId, int hallId) {
+        this.id = id;
+        this.date = date;
+        this.timeInMinutes = timeInMinutes;
+        this.movieId = movieId;
+        this.hallId = hallId;
+    }
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public long getId() {
+        return id;
+    }
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    @Column(name = "date")
+    public Date getDate() {
+        return date;
+    }
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    @Column(name = "time_in_minutes")
+    public int getTimeInMinutes() {
+        return timeInMinutes;
+    }
+    public void setTimeInMinutes(int timeInMinutes) {
+        this.timeInMinutes = timeInMinutes;
+    }
+
+    @Column(name = "movie_id")
+    public int getMovieId() {
+        return movieId;
+    }
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
+    }
+
+    @Column(name = "hall_id")
+    public int getHallId() {
+        return hallId;
+    }
+    public void setHallId(int hallId) {
+        this.hallId = hallId;
+    }
+}

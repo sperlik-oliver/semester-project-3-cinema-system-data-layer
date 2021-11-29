@@ -42,12 +42,12 @@ public class MovieController {
     public ResponseEntity<Movie> editMovie (@PathVariable(value = "id") Long movieId, @Valid @RequestBody Movie movieDetails) throws ResourceNotFoundException {
         Movie movie = movieRepository.findById(movieId)
                 .orElseThrow ( () -> new ResourceNotFoundException("Movie not found for this id :: " + movieId));
-//        movie.setActors(movieDetails.getActors());
         movie.setDescription(movieDetails.getDescription());
         movie.setDirector(movieDetails.getDirector());
         movie.setGenre(movieDetails.getGenre());
         movie.setLanguage(movieDetails.getLanguage());
-        movie.setLength(movieDetails.getLength());
+        movie.setSubtitleLanguage(movieDetails.getSubtitleLanguage());
+        movie.setLengthInMinutes(movieDetails.getLengthInMinutes());
         movie.setTitle(movieDetails.getTitle());
         movie.setYear(movieDetails.getYear());
         movie.setPosterSrc(movieDetails.getPosterSrc());

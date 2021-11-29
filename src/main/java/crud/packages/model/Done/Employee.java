@@ -7,25 +7,27 @@ import java.util.Date;
 @Table (name = "employees")
 public class Employee {
 
-
+//TODO make method to retrieve branch and sold tickets
 
     private long id;
     private String firstName;
     private String lastName;
     private String email;
     private String password;
-    private String street;
-    private String postcode;
-    private String settlement;
-    private String country;
     private int role;
     private String cpr;
-    public Date birthday;
+    private String street;
+    private String city;
+    private String postcode;
+    private String country;
+    private Date birthday;
+    private int branchId;
+    
 
     public Employee() {
     }
 
-    public Employee(long id, String firstName, String lastName, String email, String password, String street, String postcode, String settlement, String country, int role, String cpr, Date birthday) {
+    public Employee(long id, String firstName, String lastName, String email, String password, String street, String postcode, String city, String country, int role, String cpr, Date birthday) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -33,7 +35,7 @@ public class Employee {
         this.password = password;
         this.street = street;
         this.postcode = postcode;
-        this.settlement = settlement;
+        this.city = city;
         this.country = country;
         this.role = role;
         this.cpr = cpr;
@@ -97,12 +99,12 @@ public class Employee {
         this.postcode = postcode;
     }
 
-    @Column(name = "settlement", nullable = false)
-    public String getSettlement() {
-        return settlement;
+    @Column(name = "city", nullable = false)
+    public String getCity() {
+        return city;
     }
-    public void setSettlement(String settlement) {
-        this.settlement = settlement;
+    public void setCity(String city) {
+        this.city = city;
     }
 
     @Column(name = "country", nullable = false)
@@ -136,4 +138,8 @@ public class Employee {
     public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
+
+    @Column (name = "branch_id", nullable = false)
+    public int getBranchId() {return branchId;}
+    public void setBranchId (int branchId) {this.branchId = branchId;}
 }

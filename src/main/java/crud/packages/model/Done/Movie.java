@@ -1,6 +1,6 @@
 package crud.packages.model.Done;
 
-import crud.packages.model.Done.Actor;
+
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -17,27 +17,27 @@ public class Movie {
     private String genre;
     private String director;
     private String language;
+    private String subtitleLanguage;
+    private int lengthInMinutes;
     private int year;
-    private int length;
     private String posterSrc;
-    private List<Actor> actors = new ArrayList<>();
-
 
 
     public Movie() {
     }
 
-    public Movie(long id, String title, String description, String genre, String director, String language, int year, int length, String posterSrc, List<Actor> actors) {
+    public Movie(long id, String title, String description, String genre, String director, String language, String subtitleLanguage, int lengthInMinutes, int year, String posterSrc) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.genre = genre;
         this.director = director;
         this.language = language;
+        this.subtitleLanguage = subtitleLanguage;
+        this.lengthInMinutes = lengthInMinutes;
         this.year = year;
-        this.length = length;
         this.posterSrc = posterSrc;
-        this.actors = actors;
+
     }
 
     @Id
@@ -89,6 +89,18 @@ public class Movie {
         this.language = language;
     }
 
+    @Column (name = "subtitle_language", nullable = false)
+    public String getSubtitleLanguage() {return subtitleLanguage;}
+    public void setSubtitleLanguage (String subtitleLanguage) {this.subtitleLanguage = subtitleLanguage;}
+
+    @Column (name = "length_in_minutes", nullable = false)
+    public int getLengthInMinutes() {
+        return lengthInMinutes;
+    }
+    public void setLengthInMinutes(int lengthInMinutes) {
+        this.lengthInMinutes = lengthInMinutes;
+    }
+
     @Column (name = "year", nullable = false)
     public int getYear() {
         return year;
@@ -97,15 +109,7 @@ public class Movie {
         this.year = year;
     }
 
-    @Column (name = "length", nullable = false)
-    public int getLength() {
-        return length;
-    }
-    public void setLength(int length) {
-        this.length = length;
-    }
-
-    @Column (name = "posterSrc", nullable = true)
+    @Column (name = "posterSrc", nullable = false)
     public String getPosterSrc() {
         return posterSrc;
     }
@@ -113,7 +117,19 @@ public class Movie {
         this.posterSrc = posterSrc;
     }
 
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.ALL, orphanRemoval = true)
-    public List<Actor> getActors() {return actors;}
-    public void setActors (List<Actor> actors){this.actors = actors;}
+    @Override
+    public String toString() {
+        return "Movie{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", genre='" + genre + '\'' +
+                ", director='" + director + '\'' +
+                ", language='" + language + '\'' +
+                ", subtitleLanguage='" + subtitleLanguage + '\'' +
+                ", lengthInMinutes=" + lengthInMinutes +
+                ", year=" + year +
+                ", posterSrc='" + posterSrc + '\'' +
+                '}';
+    }
 }
