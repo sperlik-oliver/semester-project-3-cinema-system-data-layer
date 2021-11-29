@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -46,6 +47,16 @@ public class BranchController {
             branch.setCountry(branchDTO.getCountry());
             branch.setPostcode(branchDTO.getPostcode());
             branchRepository.save(branch);
+
+            Set<Hall> newHalls = new HashSet<Hall>();
+
+            for (Hall hall : branch.getHalls()){
+                hall.setBranch(null);
+                newHalls.add(hall);
+            }
+
+            branch.setHalls(newHalls);
+
             return ResponseEntity.ok().body(branch);
         }
 
