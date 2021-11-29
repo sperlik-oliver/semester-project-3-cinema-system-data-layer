@@ -1,18 +1,15 @@
-package crud.packages.model.Info;
+package crud.packages.model.RO;
 
-public class HallInfo {
+import crud.packages.model.Info.BranchInfo;
+
+public class HallRO {
     private long id;
     private int hallSize;
+    private BranchInfo branch;
 
-
-    public HallInfo() {
+    public HallRO() {
     }
 
-    public HallInfo(long id, int hallSize) {
-        this.id = id;
-        this.hallSize = hallSize;
-
-    }
 
 
     public int getHallSize() {
@@ -30,5 +27,13 @@ public class HallInfo {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public BranchInfo getBranch() {
+        return branch;
+    }
+
+    public void setBranch(BranchInfo branch) {
+        this.branch = branch;
     }
 }

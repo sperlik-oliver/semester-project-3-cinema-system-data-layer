@@ -1,6 +1,7 @@
 package crud.packages.model.Entities;
 
 import crud.packages.model.Info.BranchInfo;
+import crud.packages.model.Info.HallInfo;
 
 import javax.persistence.*;
 

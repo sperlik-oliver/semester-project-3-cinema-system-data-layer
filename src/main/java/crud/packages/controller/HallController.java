@@ -5,6 +5,8 @@ import crud.packages.model.DTO.HallDTO;
 import crud.packages.model.Entities.Branch;
 import crud.packages.model.Entities.Hall;
 import crud.packages.model.Info.BranchInfo;
+import crud.packages.model.Info.HallInfo;
+import crud.packages.model.RO.HallRO;
 import crud.packages.repository.BranchRepository;
 import crud.packages.repository.HallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,21 +47,28 @@ public class HallController {
 //    }
 
     @PostMapping("/hall/create")
-    public ResponseEntity<Hall> createHall (@Valid @RequestBody HallDTO hallDTO) throws ResourceNotFoundException {
+    public ResponseEntity<HallRO> createHall (@Valid @RequestBody HallDTO hallDTO) throws ResourceNotFoundException {
         Branch branch = branchRepository.findById((long)hallDTO.getBranchId())
                         .orElseThrow( () -> new ResourceNotFoundException("Branch not found"));
+
         Hall hall = new Hall();
         hall.setHallSize(hallDTO.getHallSize());
-        BranchInfo branchInfo = new BranchInfo();
-        branchInfo.setId(branch.getId());
-        branchInfo.setCity(branch.getCity());
-        branchInfo.setCountry(branch.getCountry());
-        branchInfo.setPostcode(branch.getPostcode());
-        branchInfo.setStreet(branch.getStreet());
         hall.setBranch(branch);
         hallRepository.save(hall);
-        hall.getBranch().setHalls(null);
-        return ResponseEntity.ok().body(hall);
+
+        BranchInfo branchInfo = new BranchInfo();
+        branchInfo.setStreet(branch.getStreet());
+        branchInfo.setPostcode(branch.getPostcode());
+        branchInfo.setCountry(branch.getCountry());
+        branchInfo.setCity(branch.getCity());
+        branchInfo.setId(branch.getId());
+
+        HallRO hallRO = new HallRO();
+        hallRO.setId(hall.getId());
+        hallRO.setHallSize(hall.getHallSize());
+        hallRO.setBranch(branchInfo);
+
+        return ResponseEntity.ok().body(hallRO);
     }
 
     @PutMapping("/hall/edit/{id}")
