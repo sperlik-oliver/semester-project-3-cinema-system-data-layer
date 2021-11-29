@@ -39,29 +39,17 @@ public class BranchController {
         }
 
         @PostMapping("/branch/create")
-        public ResponseEntity<BranchRO> createBranch (@Valid @RequestBody BranchDTO branchDTO) throws ResourceNotFoundException {
+        public ResponseEntity<Branch> createBranch (@Valid @RequestBody BranchDTO branchDTO) throws ResourceNotFoundException {
             Branch branch = new Branch();
             branch.setCity(branchDTO.getCity());
             branch.setStreet(branchDTO.getStreet());
             branch.setCountry(branchDTO.getCountry());
             branch.setPostcode(branchDTO.getPostcode());
             branchRepository.save(branch);
-
-            BranchRO branchRO = new BranchRO();
-            branchRO.setCity(branch.getCity());
-            branchRO.setCountry(branch.getCountry());
-            branchRO.setPostcode(branch.getPostcode());
-            branchRO.setStreet(branch.getStreet());
-            branchRO.setId(branch.getId());
-            ArrayList<HallInfo> hallsReturned = new ArrayList<HallInfo>();
-            HallInfo hallInfo = null;
-            for (Hall hall : branch.getHalls()) {
-                hallInfo.setHallSize(hall.getHallSize());
-                hallInfo.setId(hall.getId());
-                hallsReturned.add(hallInfo);
+            for (Hall hall : branch.getHalls()){
+                hall.setBranch(null);
             }
-            branchRO.setHalls((Set<HallInfo>) hallsReturned);
-            return ResponseEntity.ok().body(branchRO);
+            return ResponseEntity.ok().body(branch);
         }
 
         @PutMapping("/branch/edit/{id}")

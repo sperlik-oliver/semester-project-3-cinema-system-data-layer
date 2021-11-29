@@ -47,7 +47,7 @@ public class HallController {
 //    }
 
     @PostMapping("/hall/create")
-    public ResponseEntity<HallRO> createHall (@Valid @RequestBody HallDTO hallDTO) throws ResourceNotFoundException {
+    public ResponseEntity<Hall> createHall (@Valid @RequestBody HallDTO hallDTO) throws ResourceNotFoundException {
         Branch branch = branchRepository.findById((long)hallDTO.getBranchId())
                         .orElseThrow( () -> new ResourceNotFoundException("Branch not found"));
 
@@ -56,19 +56,8 @@ public class HallController {
         hall.setBranch(branch);
         hallRepository.save(hall);
 
-        BranchInfo branchInfo = new BranchInfo();
-        branchInfo.setStreet(branch.getStreet());
-        branchInfo.setPostcode(branch.getPostcode());
-        branchInfo.setCountry(branch.getCountry());
-        branchInfo.setCity(branch.getCity());
-        branchInfo.setId(branch.getId());
-
-        HallRO hallRO = new HallRO();
-        hallRO.setId(hall.getId());
-        hallRO.setHallSize(hall.getHallSize());
-        hallRO.setBranch(branchInfo);
-
-        return ResponseEntity.ok().body(hallRO);
+        hall.getBranch().setHalls(null);
+        return ResponseEntity.ok().body(hall);
     }
 
     @PutMapping("/hall/edit/{id}")
