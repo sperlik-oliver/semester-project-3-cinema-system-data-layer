@@ -44,6 +44,8 @@ public class HallController {
 
     @PostMapping("/hall/create")
     public ResponseEntity<Hall> createHall (@Valid @RequestBody HallDTO hallDTO) throws ResourceNotFoundException {
+        System.out.println(hallDTO);
+        System.out.println(branchRepository);
         Branch branch = branchRepository.findById((long)hallDTO.getBranchId())
                         .orElseThrow( () -> new ResourceNotFoundException("Branch not found"));
         System.out.println(branch);
