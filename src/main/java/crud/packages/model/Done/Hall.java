@@ -10,15 +10,15 @@ public class Hall {
 
     private long id;
     private int hallSize;
-    private long branchId;
+    private Branch branch;
 
     public Hall() {
     }
 
-    public Hall(long id, int hallSize, int branchId) {
+    public Hall(long id, int hallSize, Branch branch) {
         this.id = id;
         this.hallSize = hallSize;
-        this.branchId = branchId;
+        this.branch = branch;
     }
 
     @Id
@@ -38,12 +38,12 @@ public class Hall {
         this.hallSize = hallSize;
     }
 
-    @Column (name = "branch_id")
-    @ManyToOne
-    public long getBranchId() {
-        return branchId;
+    @ManyToOne(optional = false)
+    @JoinColumn (name = "branch_id", nullable = false, updatable = true)
+    public Branch getBranch() {
+        return branch;
     }
-    public void setBranchId(long branchId) {
-        this.branchId = branchId;
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 }

@@ -35,11 +35,11 @@ public class HallController {
         return ResponseEntity.ok().body(hall);
     }
 
-    @GetMapping("/hall/{id}/branch")
-    public ResponseEntity<Branch> getHallBranch (@PathVariable(value = "id") Long hallId) throws ResourceNotFoundException {
-        Branch branch = hallRepository.getHallBranch(hallId);
-        return ResponseEntity.ok().body(branch);
-    }
+//    @GetMapping("/hall/{id}/branch")
+//    public ResponseEntity<Branch> getHallBranch (@PathVariable(value = "id") Long hallId) throws ResourceNotFoundException {
+//        Branch branch = hallRepository.getHallBranch(hallId);
+//        return ResponseEntity.ok().body(branch);
+//    }
 
     @PostMapping("/hall/create")
     public ResponseEntity<Hall> createHall (@Valid @RequestBody Hall hall) throws ResourceNotFoundException {
@@ -52,7 +52,7 @@ public class HallController {
         Hall hall = hallRepository.findById(hallId)
                 .orElseThrow ( () -> new ResourceNotFoundException("Hall not found for this id :: " + hallId));
         hall.setHallSize(hallDetails.getHallSize());
-        hall.setBranchId(hallDetails.getBranchId());
+        hall.setBranch(hallDetails.getBranch());
         final Hall updatedHall = hallRepository.save(hall);
         return ResponseEntity.ok().body(updatedHall);
     }
