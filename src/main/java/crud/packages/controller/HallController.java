@@ -19,6 +19,7 @@ public class HallController {
 
     @Autowired
     HallRepository hallRepository;
+    @Autowired
     BranchRepository branchRepository;
 
 
