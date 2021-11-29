@@ -20,7 +20,7 @@ public class Branch {
     private String city;
     private String postcode;
     private String country;
-    private Set<HallInfo> halls;
+    private Set<Hall> halls;
 
 
     public Branch() {
@@ -76,8 +76,8 @@ public class Branch {
     }
 
     @OneToMany(mappedBy = "branch", fetch = FetchType.LAZY)
-    public Set<HallInfo> getHalls () {return halls;}
-    public void setHalls(Set<HallInfo> halls) {this.halls = halls;}
+    public Set<Hall> getHalls () {return halls;}
+    public void setHalls(Set<Hall> halls) {this.halls = halls;}
 
 
 }
