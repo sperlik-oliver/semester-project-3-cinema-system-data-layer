@@ -50,6 +50,7 @@ public class BranchController {
 
             Set<Hall> newHalls = new HashSet<Hall>();
 
+            System.out.println(branch.getHalls());
             for (Hall hall : branch.getHalls()){
                 hall.setBranch(null);
                 newHalls.add(hall);
