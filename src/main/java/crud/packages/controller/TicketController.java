@@ -1,7 +1,7 @@
 package crud.packages.controller;
 
 import crud.packages.exception.ResourceNotFoundException;
-import crud.packages.model.Ticket;
+import crud.packages.model.Entities.Ticket;
 import crud.packages.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

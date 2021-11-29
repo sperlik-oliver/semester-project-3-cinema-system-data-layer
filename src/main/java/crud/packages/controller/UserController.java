@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.validation.Valid;
 
-import crud.packages.model.Entities.Login;
+import crud.packages.model.Login;
 import crud.packages.repository.UserRepository;
-import crud.packages.model.Done.User;
+import crud.packages.model.Entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;

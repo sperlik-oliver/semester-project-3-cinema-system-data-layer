@@ -1,7 +1,7 @@
 package crud.packages.controller;
 
 import crud.packages.exception.ResourceNotFoundException;
-import crud.packages.model.Done.Branch;
+import crud.packages.model.Entities.Branch;
 import crud.packages.repository.BranchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package crud.packages.model.Done;
+package crud.packages.model.Entities;
 
 import javax.persistence.*;
 import java.util.Date;

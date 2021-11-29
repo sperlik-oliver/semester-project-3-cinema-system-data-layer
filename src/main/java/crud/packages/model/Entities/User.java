@@ -1,4 +1,4 @@
-package crud.packages.model.Done;
+package crud.packages.model.Entities;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

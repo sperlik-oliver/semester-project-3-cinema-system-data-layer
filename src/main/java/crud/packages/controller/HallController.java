@@ -1,8 +1,9 @@
 package crud.packages.controller;
 
 import crud.packages.exception.ResourceNotFoundException;
-import crud.packages.model.Done.Branch;
-import crud.packages.model.Done.Hall;
+import crud.packages.model.DTO.HallDTO;
+import crud.packages.model.Entities.Branch;
+import crud.packages.model.Entities.Hall;
 import crud.packages.repository.BranchRepository;
 import crud.packages.repository.HallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +43,10 @@ public class HallController {
 //    }
 
     @PostMapping("/hall/create")
-    public ResponseEntity<Hall> createHall (@Valid @RequestBody Hall hall) throws ResourceNotFoundException {
+    public ResponseEntity<Hall> createHall (@Valid @RequestBody HallDTO hallDTO) throws ResourceNotFoundException {
+        Branch branch = branchRepository.findById(hallDTO.getBranchId())
+                        .orElseThrow( () -> new ResourceNotFoundException("Branch not found"));
+        Hall hall = new Hall(hallDTO.getId(), hallDTO.getHallSize(), branch);
         hallRepository.save(hall);
         return ResponseEntity.ok().body(hall);
     }

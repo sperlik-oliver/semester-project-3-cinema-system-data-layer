@@ -1,4 +1,4 @@
-package crud.packages.model.Entities;
+package crud.packages.model;
 
 public class Login {
     private String email;

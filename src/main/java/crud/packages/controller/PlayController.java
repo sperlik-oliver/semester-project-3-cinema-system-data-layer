@@ -1,7 +1,7 @@
 package crud.packages.controller;
 
 import crud.packages.exception.ResourceNotFoundException;
-import crud.packages.model.Done.Play;
+import crud.packages.model.Entities.Play;
 import crud.packages.repository.PlayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

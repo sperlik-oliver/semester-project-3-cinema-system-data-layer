@@ -1,6 +1,7 @@
-package crud.packages.model.Done;
+package crud.packages.model.Entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 
 //TODO create method to retrieve halls and employees and to cascade delete hall
@@ -16,6 +17,7 @@ public class Branch {
     private String city;
     private String postcode;
     private String country;
+    private Set<Hall> halls;
 
 
     public Branch() {
@@ -69,5 +71,10 @@ public class Branch {
     public void setCountry(String country) {
         this.country = country;
     }
+
+    @OneToMany(mappedBy = "branch")
+    public Set<Hall> getHalls () {return halls;}
+    public void setHalls(Set<Hall> halls) {this.halls = halls;}
+
 
 }

@@ -1,14 +1,11 @@
 package crud.packages.controller;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import crud.packages.exception.ResourceNotFoundException;
-import crud.packages.model.Done.Movie;
+import crud.packages.model.Entities.Movie;
 import crud.packages.repository.MovieRepository;
-import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.ResourceAccessException;
 
 import javax.validation.Valid;
 import java.util.List;
