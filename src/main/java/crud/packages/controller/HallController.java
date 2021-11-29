@@ -46,7 +46,9 @@ public class HallController {
     public ResponseEntity<Hall> createHall (@Valid @RequestBody HallDTO hallDTO) throws ResourceNotFoundException {
         Branch branch = branchRepository.findById(hallDTO.getBranchId())
                         .orElseThrow( () -> new ResourceNotFoundException("Branch not found"));
-        Hall hall = new Hall(hallDTO.getId(), hallDTO.getHallSize(), branch);
+        Hall hall = new Hall();
+        hall.setHallSize(hallDTO.getHallSize());
+        hall.setBranch(branch);
         hallRepository.save(hall);
         return ResponseEntity.ok().body(hall);
     }

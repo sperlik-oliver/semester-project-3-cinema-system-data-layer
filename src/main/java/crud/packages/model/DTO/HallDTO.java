@@ -3,7 +3,6 @@ package crud.packages.model.DTO;
 import crud.packages.model.Entities.Branch;
 
 public class HallDTO {
-    private long id;
     private int hallSize;
     private long branchId;
 
@@ -11,18 +10,10 @@ public class HallDTO {
     }
 
     public HallDTO(long id, int hallSize, long branchId) {
-        this.id = id;
         this.hallSize = hallSize;
         this.branchId = branchId;
     }
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
 
     public int getHallSize() {
         return hallSize;

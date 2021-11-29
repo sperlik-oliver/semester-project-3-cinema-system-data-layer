@@ -1,6 +1,7 @@
 package crud.packages.controller;
 
 import crud.packages.exception.ResourceNotFoundException;
+import crud.packages.model.DTO.BranchDTO;
 import crud.packages.model.Entities.Branch;
 import crud.packages.repository.BranchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +34,12 @@ public class BranchController {
         }
 
         @PostMapping("/branch/create")
-        public ResponseEntity<Branch> createBranch (@Valid @RequestBody Branch branch) throws ResourceNotFoundException {
+        public ResponseEntity<Branch> createBranch (@Valid @RequestBody BranchDTO branchDTO) throws ResourceNotFoundException {
+            Branch branch = new Branch();
+            branch.setCity(branchDTO.getCity());
+            branch.setStreet(branchDTO.getStreet());
+            branch.setCountry(branchDTO.getCountry());
+            branch.setPostcode(branchDTO.getPostcode());
             branchRepository.save(branch);
             return ResponseEntity.ok().body(branch);
         }
