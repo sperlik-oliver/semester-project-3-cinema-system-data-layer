@@ -1,8 +1,7 @@
 package crud.packages.model.Info;
 
-import javax.persistence.Entity;
 
-@Entity
+
 public class BranchInfo {
 
     private long id;
