@@ -1,5 +1,7 @@
 package crud.packages.model.Entities;
 
+import crud.packages.model.Info.BranchInfo;
+
 import javax.persistence.*;
 
 //TODO make method to retrieve plays of hall and branch
@@ -10,12 +12,12 @@ public class Hall {
 
     private long id;
     private int hallSize;
-    private Branch branch;
+    private BranchInfo branch;
 
     public Hall() {
     }
 
-    public Hall(long id, int hallSize, Branch branch) {
+    public Hall(long id, int hallSize, BranchInfo branch) {
         this.id = id;
         this.hallSize = hallSize;
         this.branch = branch;
@@ -40,10 +42,10 @@ public class Hall {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn (name = "branch_id", nullable = false, updatable = true)
-    public Branch getBranch() {
+    public BranchInfo getBranch() {
         return branch;
     }
-    public void setBranch(Branch branch) {
+    public void setBranch(BranchInfo branch) {
         this.branch = branch;
     }
 }

@@ -4,6 +4,7 @@ import crud.packages.exception.ResourceNotFoundException;
 import crud.packages.model.DTO.HallDTO;
 import crud.packages.model.Entities.Branch;
 import crud.packages.model.Entities.Hall;
+import crud.packages.model.Info.BranchInfo;
 import crud.packages.repository.BranchRepository;
 import crud.packages.repository.HallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,7 +50,13 @@ public class HallController {
                         .orElseThrow( () -> new ResourceNotFoundException("Branch not found"));
         Hall hall = new Hall();
         hall.setHallSize(hallDTO.getHallSize());
-        hall.setBranch(branch);
+        BranchInfo branchInfo = new BranchInfo();
+        branchInfo.setId(branch.getId());
+        branchInfo.setCity(branch.getCity());
+        branchInfo.setCountry(branch.getCountry());
+        branchInfo.setPostcode(branch.getPostcode());
+        branchInfo.setStreet(branch.getStreet());
+        hall.setBranch(branchInfo);
         hallRepository.save(hall);
         return ResponseEntity.ok().body(hall);
     }

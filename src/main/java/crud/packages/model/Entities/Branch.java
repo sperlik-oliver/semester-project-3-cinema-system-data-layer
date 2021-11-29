@@ -1,5 +1,8 @@
 package crud.packages.model.Entities;
 
+import crud.packages.model.DTO.HallDTO;
+import crud.packages.model.Info.HallInfo;
+
 import javax.persistence.*;
 import java.util.Set;
 
@@ -17,7 +20,7 @@ public class Branch {
     private String city;
     private String postcode;
     private String country;
-    private Set<Hall> halls;
+    private Set<HallInfo> halls;
 
 
     public Branch() {
@@ -73,8 +76,8 @@ public class Branch {
     }
 
     @OneToMany(mappedBy = "branch", fetch = FetchType.LAZY)
-    public Set<Hall> getHalls () {return halls;}
-    public void setHalls(Set<Hall> halls) {this.halls = halls;}
+    public Set<HallInfo> getHalls () {return halls;}
+    public void setHalls(Set<HallInfo> halls) {this.halls = halls;}
 
 
 }
