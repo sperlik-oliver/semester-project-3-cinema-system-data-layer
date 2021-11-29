@@ -9,5 +9,5 @@ import org.springframework.data.repository.query.Param;
 
 public interface HallRepository extends JpaRepository<Hall, Long> {
     @Query("SELECT b FROM Branch b WHERE b.id = :id")
-    public Branch getHallBranch(@Param("id")int branchId);
+    public Branch getHallBranch(@Param("id")long branchId);
 }

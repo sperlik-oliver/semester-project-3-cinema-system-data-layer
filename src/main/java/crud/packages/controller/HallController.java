@@ -18,7 +18,6 @@ public class HallController {
 
     @Autowired
     HallRepository hallRepository;
-    BranchRepository branchRepository;
 
 
 
@@ -39,8 +38,9 @@ public class HallController {
     public ResponseEntity<Branch> getHallBranch (@PathVariable() Long hallId) throws ResourceNotFoundException {
         Hall hall = hallRepository.findById(hallId)
                 .orElseThrow( () -> new ResourceNotFoundException("Hall not found for this id :: " + hallId));
-        Branch branch = branchRepository.findById(hall.getBranchId())
-                .orElseThrow( () -> new ResourceNotFoundException("Branch not found for this hall :: " + hallId));
+        Branch branch = hallRepository.getHallBranch(hall.getBranchId());
+        if (branch == null)
+            throw new ResourceNotFoundException("Branch not found for this hall");
         return ResponseEntity.ok().body(branch);
     }
 
