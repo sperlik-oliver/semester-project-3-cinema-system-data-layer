@@ -39,6 +39,7 @@ public class Hall {
     }
 
     @Column (name = "branch_id")
+    @ManyToOne
     public long getBranchId() {
         return branchId;
     }

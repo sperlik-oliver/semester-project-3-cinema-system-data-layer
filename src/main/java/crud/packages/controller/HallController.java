@@ -37,10 +37,7 @@ public class HallController {
 
     @GetMapping("/hall/{id}/branch")
     public ResponseEntity<Branch> getHallBranch (@PathVariable(value = "id") Long hallId) throws ResourceNotFoundException {
-        Hall hall = hallRepository.findById(hallId)
-                .orElseThrow( () -> new ResourceNotFoundException("Hall not found for this id :: " + hallId));
-        Branch branch = branchRepository.findById(hall.getBranchId())
-                .orElseThrow( () -> new ResourceNotFoundException("Branch not found for this hall"));
+        Branch branch = hallRepository.getHallBranch(hallId);
         return ResponseEntity.ok().body(branch);
     }
 

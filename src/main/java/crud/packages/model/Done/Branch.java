@@ -31,6 +31,7 @@ public class Branch {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @OneToMany(mappedBy = "hall.branchId")
     public long getId() {
         return id;
     }
