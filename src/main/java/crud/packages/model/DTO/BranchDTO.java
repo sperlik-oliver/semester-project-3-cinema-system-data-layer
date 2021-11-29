@@ -1,6 +1,7 @@
 package crud.packages.model.DTO;
 
 public class BranchDTO {
+
     private String street;
     private String city;
     private String postcode;
