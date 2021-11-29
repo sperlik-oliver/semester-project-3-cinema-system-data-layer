@@ -46,9 +46,6 @@ public class BranchController {
             branch.setCountry(branchDTO.getCountry());
             branch.setPostcode(branchDTO.getPostcode());
             branchRepository.save(branch);
-            for (Hall hall : branch.getHalls()){
-                hall.setBranch(null);
-            }
             return ResponseEntity.ok().body(branch);
         }
 
