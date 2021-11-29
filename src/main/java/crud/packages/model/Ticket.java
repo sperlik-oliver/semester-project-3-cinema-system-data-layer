@@ -11,14 +11,14 @@ public class Ticket {
     private long id;
     private int row;
     private int column;
-    private int userId;
-    private int employeeId;
-    private int playId;
+    private long userId;
+    private long employeeId;
+    private long playId;
 
     public Ticket() {
     }
 
-    public Ticket(long id, int row, int column, int userId, int employeeId, int playId) {
+    public Ticket(long id, int row, int column, long userId, long employeeId, long playId) {
         this.id = id;
         this.row = row;
         this.column = column;
@@ -53,26 +53,26 @@ public class Ticket {
     }
 
     @Column(name = "user_id")
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
-    public void setUserId(int userId) {
+    public void setUserId(long userId) {
         this.userId = userId;
     }
 
     @Column(name = "employee_id")
-    public int getEmployeeId() {
+    public long getEmployeeId() {
         return employeeId;
     }
-    public void setEmployeeId(int employeeId) {
+    public void setEmployeeId(long employeeId) {
         this.employeeId = employeeId;
     }
 
     @Column(name = "play_id")
-    public int getPlayId() {
+    public long getPlayId() {
         return playId;
     }
-    public void setPlayId(int playId) {
+    public void setPlayId(long playId) {
         this.playId = playId;
     }
 }

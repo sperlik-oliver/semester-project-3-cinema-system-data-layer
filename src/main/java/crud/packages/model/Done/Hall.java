@@ -10,7 +10,7 @@ public class Hall {
 
     private long id;
     private int hallSize;
-    private int branchId;
+    private long branchId;
 
     public Hall() {
     }
@@ -39,10 +39,10 @@ public class Hall {
     }
 
     @Column (name = "branch_id")
-    public int getBranchId() {
+    public long getBranchId() {
         return branchId;
     }
-    public void setBranchId(int branchId) {
+    public void setBranchId(long branchId) {
         this.branchId = branchId;
     }
 }

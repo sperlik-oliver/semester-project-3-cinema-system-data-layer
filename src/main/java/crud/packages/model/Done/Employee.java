@@ -21,13 +21,13 @@ public class Employee {
     private String postcode;
     private String country;
     private Date birthday;
-    private int branchId;
+    private long branchId;
     
 
     public Employee() {
     }
 
-    public Employee(long id, String firstName, String lastName, String email, String password, String street, String postcode, String city, String country, int role, String cpr, Date birthday) {
+    public Employee(long id, String firstName, String lastName, String email, String password, String street, String postcode, String city, String country, int role, String cpr, Date birthday, long branchId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -40,6 +40,7 @@ public class Employee {
         this.role = role;
         this.cpr = cpr;
         this.birthday = birthday;
+        this.branchId = branchId;
     }
 
     @Id
@@ -140,6 +141,6 @@ public class Employee {
     }
 
     @Column (name = "branch_id", nullable = false)
-    public int getBranchId() {return branchId;}
-    public void setBranchId (int branchId) {this.branchId = branchId;}
+    public long getBranchId() {return branchId;}
+    public void setBranchId (long branchId) {this.branchId = branchId;}
 }

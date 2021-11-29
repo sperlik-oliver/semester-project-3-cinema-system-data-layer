@@ -13,13 +13,13 @@ public class Play {
     private long id;
     private Date date;
     private int timeInMinutes;
-    private int movieId;
-    private int hallId;
+    private long movieId;
+    private long hallId;
 
     public Play() {
     }
 
-    public Play(long id, Date date, int timeInMinutes, int movieId, int hallId) {
+    public Play(long id, Date date, int timeInMinutes, long movieId, long hallId) {
         this.id = id;
         this.date = date;
         this.timeInMinutes = timeInMinutes;
@@ -53,18 +53,18 @@ public class Play {
     }
 
     @Column(name = "movie_id")
-    public int getMovieId() {
+    public long getMovieId() {
         return movieId;
     }
-    public void setMovieId(int movieId) {
+    public void setMovieId(long movieId) {
         this.movieId = movieId;
     }
 
     @Column(name = "hall_id")
-    public int getHallId() {
+    public long getHallId() {
         return hallId;
     }
-    public void setHallId(int hallId) {
+    public void setHallId(long hallId) {
         this.hallId = hallId;
     }
 }
