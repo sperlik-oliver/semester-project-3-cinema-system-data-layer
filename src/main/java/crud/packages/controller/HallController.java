@@ -56,7 +56,7 @@ public class HallController {
         branchInfo.setCountry(branch.getCountry());
         branchInfo.setPostcode(branch.getPostcode());
         branchInfo.setStreet(branch.getStreet());
-        hall.setBranch(branchInfo);
+        hall.setBranch(branch);
         hallRepository.save(hall);
         return ResponseEntity.ok().body(hall);
     }
