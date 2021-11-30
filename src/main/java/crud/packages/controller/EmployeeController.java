@@ -41,8 +41,9 @@ public class EmployeeController {
         employee.setRole(employeeDTO.getRole());
         employee.setStreet(employeeDTO.getStreet());
         employee.setCity(employeeDTO.getCity());
-        employee.setPostcode(employee.getPostcode());
-        employee.setCountry(employee.getCountry());
+        employee.setPostcode(employeeDTO.getPostcode());
+        employee.setCountry(employeeDTO.getCountry());
+        employee.setEmail(employee.getEmail());
         employeeRepository.save(employee);
         return ResponseEntity.ok().body(employee);
     }
