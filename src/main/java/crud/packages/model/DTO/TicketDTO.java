@@ -1,36 +1,23 @@
-package crud.packages.model.Entities;
+package crud.packages.model.DTO;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import crud.packages.model.Entities.Play;
 
 import javax.persistence.*;
 
-//TODO make method to retrieve play, user and employee of ticket
 
-@Entity
-@Table(name = "tickets")
-public class Ticket {
+public class TicketDTO {
 
-    private long id;
     private int row;
     private int column;
 //    private long userId;
 //    private long employeeId;
-    private Play play;
+    private long playId;
 
-    public Ticket() {
+    public TicketDTO() {
     }
 
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    @Column(name = "row")
     public int getRow() {
         return row;
     }
@@ -38,7 +25,6 @@ public class Ticket {
         this.row = row;
     }
 
-    @Column(name = "column")
     public int getColumn() {
         return column;
     }
@@ -62,13 +48,10 @@ public class Ticket {
 //        this.employeeId = employeeId;
 //    }
 
-    @ManyToOne(optional = false)
-    @JoinColumn (name = "play_id", nullable = false, updatable = true)
-    @JsonIgnoreProperties("tickets")
-    public Play getPlay() {
-        return play;
+    public long getPlayId() {
+        return playId;
     }
-    public void setPlay(Play play) {
-        this.play = play;
+    public void setPlayId(long playId) {
+        this.playId = playId;
     }
 }

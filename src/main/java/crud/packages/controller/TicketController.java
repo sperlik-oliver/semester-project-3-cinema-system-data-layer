@@ -1,7 +1,10 @@
 package crud.packages.controller;
 
 import crud.packages.exception.ResourceNotFoundException;
+import crud.packages.model.DTO.TicketDTO;
+import crud.packages.model.Entities.Play;
 import crud.packages.model.Entities.Ticket;
+import crud.packages.repository.PlayRepository;
 import crud.packages.repository.TicketRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +19,8 @@ public class TicketController {
 
     @Autowired
     TicketRepository ticketRepository;
+    @Autowired
+    PlayRepository playRepository;
 
 
 
@@ -33,20 +38,28 @@ public class TicketController {
     }
 
     @PostMapping("/ticket/create")
-    public ResponseEntity<Ticket> createTicket (@Valid @RequestBody Ticket ticket) throws ResourceNotFoundException {
+    public ResponseEntity<Ticket> createTicket (@Valid @RequestBody TicketDTO ticketDTO) throws ResourceNotFoundException {
+        Play play = playRepository.findById(ticketDTO.getPlayId())
+                        .orElseThrow( () -> new ResourceNotFoundException("Play not found"));
+        Ticket ticket = new Ticket();
+        ticket.setColumn(ticketDTO.getColumn());
+        ticket.setRow(ticketDTO.getRow());
+        ticket.setPlay(play);
         ticketRepository.save(ticket);
         return ResponseEntity.ok().body(ticket);
     }
 
     @PutMapping("/ticket/edit/{id}")
-    public ResponseEntity<Ticket> editTicket (@PathVariable(value = "id") Long ticketId, @Valid @RequestBody Ticket ticketDetails) throws ResourceNotFoundException {
+    public ResponseEntity<Ticket> editTicket (@PathVariable(value = "id") Long ticketId, @Valid @RequestBody TicketDTO ticketDetails) throws ResourceNotFoundException {
         Ticket ticket = ticketRepository.findById(ticketId)
                 .orElseThrow ( () -> new ResourceNotFoundException("Ticket not found for this id :: " + ticketId));
+        Play play = playRepository.findById(ticketDetails.getPlayId())
+                .orElseThrow( () -> new ResourceNotFoundException("Play not found"));
         ticket.setRow(ticketDetails.getRow());
         ticket.setColumn(ticketDetails.getColumn());
-        ticket.setPlayId(ticketDetails.getPlayId());
-        ticket.setUserId(ticketDetails.getUserId());
-        ticket.setEmployeeId(ticketDetails.getEmployeeId());
+        ticket.setPlay(play);
+//        ticket.setUserId(ticketDetails.getUserId());
+//        ticket.setEmployeeId(ticketDetails.getEmployeeId());
         final Ticket updatedTicket = ticketRepository.save(ticket);
         return ResponseEntity.ok().body(updatedTicket);
     }

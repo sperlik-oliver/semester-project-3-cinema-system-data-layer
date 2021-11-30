@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 //TODO create method to retrieve tickets, hall and movie
 
@@ -17,6 +18,7 @@ public class Play {
     private int timeInMinutes;
     private Movie movie;
     private Hall hall;
+    private Set<Ticket> tickets;
 
     public Play() {}
 
@@ -63,5 +65,14 @@ public class Play {
     }
     public void setHall(Hall hall) {
         this.hall = hall;
+    }
+
+    @OneToMany(mappedBy = "play")
+    @JsonIgnoreProperties("play")
+    public Set<Ticket> getTickets() {
+        return tickets;
+    }
+    public void setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
     }
 }
