@@ -1,5 +1,6 @@
 package crud.packages.model.Entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import crud.packages.model.DTO.HallDTO;
 import crud.packages.model.Info.HallInfo;
@@ -77,7 +78,7 @@ public class Branch {
     }
 
     @OneToMany(mappedBy = "branch", fetch = FetchType.LAZY)
-    @JsonManagedReference
+    @JsonIgnoreProperties("branch")
     public Set<Hall> getHalls () {return halls;}
     public void setHalls(Set<Hall> halls) {this.halls = halls;}
 

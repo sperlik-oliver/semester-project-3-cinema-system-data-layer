@@ -1,6 +1,7 @@
 package crud.packages.model.Entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import crud.packages.model.Info.BranchInfo;
 import crud.packages.model.Info.HallInfo;
 
@@ -44,7 +45,7 @@ public class Hall {
 
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn (name = "branch_id", nullable = false, updatable = true)
-    @JsonBackReference
+    @JsonIgnoreProperties("halls")
     public Branch getBranch() {
         return branch;
     }
