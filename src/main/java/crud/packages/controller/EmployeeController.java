@@ -43,7 +43,7 @@ public class EmployeeController {
         employee.setCity(employeeDTO.getCity());
         employee.setPostcode(employeeDTO.getPostcode());
         employee.setCountry(employeeDTO.getCountry());
-        employee.setEmail(employee.getEmail());
+        employee.setEmail(employeeDTO.getEmail());
         employeeRepository.save(employee);
         return ResponseEntity.ok().body(employee);
     }
