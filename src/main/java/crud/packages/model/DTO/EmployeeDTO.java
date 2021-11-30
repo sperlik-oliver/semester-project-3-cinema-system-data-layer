@@ -1,18 +1,16 @@
-package crud.packages.model.Entities;
+package crud.packages.model.DTO;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import crud.packages.model.Entities.Ticket;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
-@Entity
-@Table (name = "employees")
-public class Employee {
+public class EmployeeDTO {
 
-//TODO make method to retrieve branch and sold tickets
 
-    private long id;
+
     private String firstName;
     private String lastName;
     private String email;
@@ -24,24 +22,14 @@ public class Employee {
     private String postcode;
     private String country;
     private Date birthday;
-    private Set<Ticket> soldTickets;
-//    private long branchId;
-    
 
-    public Employee() {
+
+
+
+    public EmployeeDTO() {
     }
 
 
-    @Id
-    @GeneratedValue (strategy = GenerationType.IDENTITY)
-    public long getId() {
-        return id;
-    }
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    @Column(name = "firstName", nullable = false)
     public String getFirstName() {
         return firstName;
     }
@@ -49,7 +37,7 @@ public class Employee {
         this.firstName = firstName;
     }
 
-    @Column(name = "lastName", nullable = false)
+
     public String getLastName() {
         return lastName;
     }
@@ -57,7 +45,7 @@ public class Employee {
         this.lastName = lastName;
     }
 
-    @Column(name = "email", nullable = false)
+
     public String getEmail() {
         return email;
     }
@@ -65,7 +53,7 @@ public class Employee {
         this.email = email;
     }
 
-    @Column(name = "password", nullable = false)
+
     public String getPassword() {
         return password;
     }
@@ -73,7 +61,7 @@ public class Employee {
         this.password = password;
     }
 
-    @Column(name = "street", nullable = false)
+
     public String getStreet() {
         return street;
     }
@@ -81,7 +69,7 @@ public class Employee {
         this.street = street;
     }
 
-    @Column(name = "postcode", nullable = false)
+
     public String getPostcode() {
         return postcode;
     }
@@ -89,7 +77,7 @@ public class Employee {
         this.postcode = postcode;
     }
 
-    @Column(name = "city", nullable = false)
+
     public String getCity() {
         return city;
     }
@@ -97,7 +85,7 @@ public class Employee {
         this.city = city;
     }
 
-    @Column(name = "country", nullable = false)
+
     public String getCountry() {
         return country;
     }
@@ -105,7 +93,7 @@ public class Employee {
         this.country = country;
     }
 
-    @Column(name = "role", nullable = false)
+
     public int getRole() {
         return role;
     }
@@ -113,7 +101,7 @@ public class Employee {
         this.role = role;
     }
 
-    @Column(name = "cpr", nullable = false)
+
     public String getCpr() {
         return cpr;
     }
@@ -121,7 +109,7 @@ public class Employee {
         this.cpr = cpr;
     }
 
-    @Column(name = "birthday", nullable = false)
+
     public Date getBirthday() {
         return birthday;
     }
@@ -129,12 +117,5 @@ public class Employee {
         this.birthday = birthday;
     }
 
-    @OneToMany(mappedBy = "employee")
-    @JsonIgnoreProperties("employee")
-    public Set<Ticket> getSoldTickets() {
-        return soldTickets;
-    }
-    public void setSoldTickets(Set<Ticket> soldTickets) {
-        this.soldTickets = soldTickets;
-    }
+
 }

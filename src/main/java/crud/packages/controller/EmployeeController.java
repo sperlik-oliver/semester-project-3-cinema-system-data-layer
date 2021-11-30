@@ -1,6 +1,7 @@
 package crud.packages.controller;
 
 import crud.packages.exception.ResourceNotFoundException;
+import crud.packages.model.DTO.EmployeeDTO;
 import crud.packages.model.Entities.Employee;
 import crud.packages.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,7 +31,18 @@ public class EmployeeController {
     }
 
     @PostMapping("/employee/create")
-    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody Employee employee) throws ResourceNotFoundException {
+    public ResponseEntity<Employee> createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) throws ResourceNotFoundException {
+        Employee employee = new Employee();
+        employee.setFirstName(employeeDTO.getFirstName());
+        employee.setLastName(employeeDTO.getLastName());
+        employee.setBirthday(employeeDTO.getBirthday());
+        employee.setCpr(employeeDTO.getCpr());
+        employee.setPassword(employeeDTO.getPassword());
+        employee.setRole(employeeDTO.getRole());
+        employee.setStreet(employeeDTO.getStreet());
+        employee.setCity(employeeDTO.getCity());
+        employee.setPostcode(employee.getPostcode());
+        employee.setCountry(employee.getCountry());
         employeeRepository.save(employee);
         return ResponseEntity.ok().body(employee);
     }
@@ -50,7 +62,7 @@ public class EmployeeController {
         employee.setPostcode(employeeDetails.getPostcode());
         employee.setCountry(employeeDetails.getCountry());
         employee.setBirthday(employeeDetails.getBirthday());
-        employee.setBranchId(employeeDetails.getBranchId());
+//        employee.setBranchId(employeeDetails.getBranchId());
 
         final Employee updatedEmployee = employeeRepository.save(employee);
         return ResponseEntity.ok().body(updatedEmployee);

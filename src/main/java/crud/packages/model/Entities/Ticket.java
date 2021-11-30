@@ -13,8 +13,8 @@ public class Ticket {
     private long id;
     private int row;
     private int column;
-//    private long userId;
-//    private long employeeId;
+    private User user;
+    private Employee employee;
     private Play play;
 
     public Ticket() {
@@ -46,21 +46,26 @@ public class Ticket {
         this.column = column;
     }
 
-//    @Column(name = "user_id")
-//    public long getUserId() {
-//        return userId;
-//    }
-//    public void setUserId(long userId) {
-//        this.userId = userId;
-//    }
-//
-//    @Column(name = "employee_id")
-//    public long getEmployee() {
-//        return employeeId;
-//    }
-//    public void setEmployeeId(long employeeId) {
-//        this.employeeId = employeeId;
-//    }
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "employee_id", nullable = true, updatable = true)
+    @JsonIgnoreProperties("soldTickets")
+    public Employee getEmployee() {
+        return employee;
+    }
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
+    }
+
+
+    @ManyToOne(optional = true)
+    @JoinColumn(name = "user_id", nullable = true, updatable = true)
+    @JsonIgnoreProperties("purchasedTickets")
+    public User getUser() {
+        return user;
+    }
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @ManyToOne(optional = false)
     @JoinColumn (name = "play_id", nullable = false, updatable = true)

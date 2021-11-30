@@ -2,16 +2,21 @@ package crud.packages.controller;
 
 import crud.packages.exception.ResourceNotFoundException;
 import crud.packages.model.DTO.TicketDTO;
+import crud.packages.model.Entities.Employee;
 import crud.packages.model.Entities.Play;
 import crud.packages.model.Entities.Ticket;
+import crud.packages.model.Entities.User;
+import crud.packages.repository.EmployeeRepository;
 import crud.packages.repository.PlayRepository;
 import crud.packages.repository.TicketRepository;
+import crud.packages.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api")
@@ -21,6 +26,10 @@ public class TicketController {
     TicketRepository ticketRepository;
     @Autowired
     PlayRepository playRepository;
+    @Autowired
+    UserRepository userRepository;
+    @Autowired
+    EmployeeRepository employeeRepository;
 
 
 
@@ -40,11 +49,25 @@ public class TicketController {
     @PostMapping("/ticket/create")
     public ResponseEntity<Ticket> createTicket (@Valid @RequestBody TicketDTO ticketDTO) throws ResourceNotFoundException {
         Play play = playRepository.findById(ticketDTO.getPlayId())
-                        .orElseThrow( () -> new ResourceNotFoundException("Play not found"));
+                .orElseThrow( () -> new ResourceNotFoundException("Play not found"));
+        User user = null;
+        Employee employee = null;
+        if (userRepository.existsById(ticketDTO.getUserId())) {
+            user = userRepository.findById(ticketDTO.getUserId())
+                    .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+        }
+        if (user == null) {
+            if (employeeRepository.existsById(ticketDTO.getEmployeeId())) {
+                employee = employeeRepository.findById(ticketDTO.getUserId())
+                        .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+            }
+        }
         Ticket ticket = new Ticket();
         ticket.setColumn(ticketDTO.getColumn());
         ticket.setRow(ticketDTO.getRow());
         ticket.setPlay(play);
+        ticket.setEmployee(employee);
+        ticket.setUser(user);
         ticketRepository.save(ticket);
         return ResponseEntity.ok().body(ticket);
     }

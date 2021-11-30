@@ -10,8 +10,8 @@ public class TicketDTO {
 
     private int row;
     private int column;
-//    private long userId;
-//    private long employeeId;
+    private long userId;
+    private long employeeId;
     private long playId;
 
     public TicketDTO() {
@@ -32,21 +32,21 @@ public class TicketDTO {
         this.column = column;
     }
 
-//    @Column(name = "user_id")
-//    public long getUserId() {
-//        return userId;
-//    }
-//    public void setUserId(long userId) {
-//        this.userId = userId;
-//    }
-//
-//    @Column(name = "employee_id")
-//    public long getEmployee() {
-//        return employeeId;
-//    }
-//    public void setEmployeeId(long employeeId) {
-//        this.employeeId = employeeId;
-//    }
+
+    public long getUserId() {
+        return userId;
+    }
+    public void setUserId(long userId) {
+        this.userId = userId;
+    }
+
+
+    public long getEmployeeId() {
+        return employeeId;
+    }
+    public void setEmployeeId(long employeeId) {
+        this.employeeId = employeeId;
+    }
 
     public long getPlayId() {
         return playId;

@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import crud.packages.model.DTO.UserDTO;
 import crud.packages.model.Login;
 import crud.packages.repository.UserRepository;
 import crud.packages.model.Entities.User;
@@ -40,7 +41,12 @@ public class UserController {
 	}
 
 	@PostMapping("/user/register")
-	public ResponseEntity<User> createUser(@Valid @RequestBody User user) {
+	public ResponseEntity<User> createUser(@Valid @RequestBody UserDTO userDto) {
+		User user = new User();
+		user.setFirstName(userDto.getFirstName());
+		user.setLastName(userDto.getLastName());
+		user.setEmail(userDto.getEmail());
+		user.setPassword(userDto.getPassword());
 		userRepository.save(user);
 		return ResponseEntity.ok().body(user);
 	}

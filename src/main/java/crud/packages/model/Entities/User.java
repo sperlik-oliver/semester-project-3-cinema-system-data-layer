@@ -1,11 +1,9 @@
 package crud.packages.model.Entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
+import javax.persistence.*;
+import java.util.Set;
 
 
 //TODO create method to retrieve tickets purchased
@@ -19,20 +17,9 @@ public class User {
 	private String lastName;
 	private String email;
 	private String password;
-	private String street;
-	private String postcode;
-	private String settlement;
-	private String country;
+	private Set<Ticket> purchasedTickets;
 	
 	public User() {
-		
-	}
-	
-	public User(String firstName, String lastName, String email, String password) {
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.email = email;
-		this.password = password;
 	}
 	
 	@Id
@@ -76,11 +63,18 @@ public class User {
 		this.password = password;
 	}
 
-
-
-	@Override
-	public String toString() {
-		return "Employee [id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + "password=" + password + "]";
+	@OneToMany(mappedBy = "user")
+	@JsonIgnoreProperties("user")
+	public Set<Ticket> getPurchasedTickets() {
+		return purchasedTickets;
 	}
+	public void setPurchasedTickets(Set<Ticket> purchasedTickets) {
+		this.purchasedTickets = purchasedTickets;
+	}
+
+
+
+
+
 
 }
