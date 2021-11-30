@@ -30,7 +30,7 @@ public class Ticket {
         this.id = id;
     }
 
-    @Column(name = "row")
+    @Column(name = "_row")
     public int getRow() {
         return row;
     }
@@ -38,7 +38,7 @@ public class Ticket {
         this.row = row;
     }
 
-    @Column(name = "column")
+    @Column(name = "_column")
     public int getColumn() {
         return column;
     }
