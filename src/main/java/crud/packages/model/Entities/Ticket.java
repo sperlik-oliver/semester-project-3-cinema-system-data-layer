@@ -15,7 +15,7 @@ public class Ticket {
     private int column;
 //    private long userId;
 //    private long employeeId;
-//    private Play play;
+    private Play play;
 
     public Ticket() {
     }
@@ -62,13 +62,13 @@ public class Ticket {
 //        this.employeeId = employeeId;
 //    }
 
-//    @ManyToOne(optional = false)
-//    @JoinColumn (name = "play_id", nullable = false, updatable = true)
-//    @JsonIgnoreProperties("tickets")
-//    public Play getPlay() {
-//        return play;
-//    }
-//    public void setPlay(Play play) {
-//        this.play = play;
-//    }
+    @ManyToOne(optional = false)
+    @JoinColumn (name = "play_id", nullable = false, updatable = true)
+    @JsonIgnoreProperties("tickets")
+    public Play getPlay() {
+        return play;
+    }
+    public void setPlay(Play play) {
+        this.play = play;
+    }
 }

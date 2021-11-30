@@ -67,12 +67,12 @@ public class Play {
         this.hall = hall;
     }
 
-//    @OneToMany(mappedBy = "play")
-//    @JsonIgnoreProperties("play")
-//    public Set<Ticket> getTickets() {
-//        return tickets;
-//    }
-//    public void setTickets(Set<Ticket> tickets) {
-//        this.tickets = tickets;
-//    }
+    @OneToMany(mappedBy = "play")
+    @JsonIgnoreProperties("play")
+    public Set<Ticket> getTickets() {
+        return tickets;
+    }
+    public void setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
+    }
 }
