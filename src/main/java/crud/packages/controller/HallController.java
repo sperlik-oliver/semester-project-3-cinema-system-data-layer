@@ -6,7 +6,6 @@ import crud.packages.model.Entities.Branch;
 import crud.packages.model.Entities.Hall;
 import crud.packages.model.Info.BranchInfo;
 import crud.packages.model.Info.HallInfo;
-import crud.packages.model.RO.HallRO;
 import crud.packages.repository.BranchRepository;
 import crud.packages.repository.HallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
