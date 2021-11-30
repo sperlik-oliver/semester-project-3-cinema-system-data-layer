@@ -44,7 +44,7 @@ public class TicketController {
         Ticket ticket = new Ticket();
         ticket.setColumn(ticketDTO.getColumn());
         ticket.setRow(ticketDTO.getRow());
-        ticket.setPlay(play);
+//        ticket.setPlay(play);
         ticketRepository.save(ticket);
         return ResponseEntity.ok().body(ticket);
     }
@@ -57,7 +57,7 @@ public class TicketController {
                 .orElseThrow( () -> new ResourceNotFoundException("Play not found"));
         ticket.setRow(ticketDetails.getRow());
         ticket.setColumn(ticketDetails.getColumn());
-        ticket.setPlay(play);
+//        ticket.setPlay(play);
 //        ticket.setUserId(ticketDetails.getUserId());
 //        ticket.setEmployeeId(ticketDetails.getEmployeeId());
         final Ticket updatedTicket = ticketRepository.save(ticket);
