@@ -18,7 +18,7 @@ public class Play {
     private int timeInMinutes;
     private Movie movie;
     private Hall hall;
-//    private Set<Ticket> tickets;
+    private Set<Ticket> tickets;
 
     public Play() {}
 
