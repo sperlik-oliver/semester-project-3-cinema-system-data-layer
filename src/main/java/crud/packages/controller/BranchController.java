@@ -5,12 +5,13 @@ import crud.packages.model.DTO.BranchDTO;
 import crud.packages.model.Entities.Branch;
 import crud.packages.model.Entities.Hall;
 import crud.packages.model.Info.HallInfo;
-import crud.packages.model.RO.BranchRO;
+
 import crud.packages.repository.BranchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -40,6 +41,7 @@ public class BranchController {
         }
 
         @PostMapping("/branch/create")
+        @Transactional
         public ResponseEntity<Branch> createBranch (@Valid @RequestBody BranchDTO branchDTO) throws ResourceNotFoundException {
             Branch branch = new Branch();
             branch.setCity(branchDTO.getCity());
@@ -47,17 +49,6 @@ public class BranchController {
             branch.setCountry(branchDTO.getCountry());
             branch.setPostcode(branchDTO.getPostcode());
             branchRepository.save(branch);
-
-            Set<Hall> newHalls = new HashSet<Hall>();
-
-            System.out.println(branch.getHalls());
-            for (Hall hall : branch.getHalls()){
-                hall.setBranch(null);
-                newHalls.add(hall);
-            }
-
-            branch.setHalls(newHalls);
-
             return ResponseEntity.ok().body(branch);
         }
 

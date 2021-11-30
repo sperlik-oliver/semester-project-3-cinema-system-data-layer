@@ -55,8 +55,7 @@ public class HallController {
         hall.setHallSize(hallDTO.getHallSize());
         hall.setBranch(branch);
         hallRepository.save(hall);
-
-        hall.getBranch().setHalls(null);
+//        hall.getBranch().setHalls(null);
         return ResponseEntity.ok().body(hall);
     }
 
