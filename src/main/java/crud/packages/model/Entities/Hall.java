@@ -2,10 +2,9 @@ package crud.packages.model.Entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import crud.packages.model.Info.BranchInfo;
-import crud.packages.model.Info.HallInfo;
 
 import javax.persistence.*;
+import java.util.Set;
 
 //TODO make method to retrieve plays of hall and branch
 
@@ -16,6 +15,7 @@ public class Hall {
     private long id;
     private int hallSize;
     private Branch branch;
+    private Set<Play> programme;
 
     public Hall() {
     }
@@ -51,5 +51,14 @@ public class Hall {
     }
     public void setBranch(Branch branch) {
         this.branch = branch;
+    }
+
+    @OneToMany(mappedBy = "hall")
+    @JsonIgnoreProperties("hall")
+    public Set<Play> getProgramme() {
+        return programme;
+    }
+    public void setProgramme(Set<Play> programme) {
+        this.programme = programme;
     }
 }

@@ -1,11 +1,17 @@
 package crud.packages.controller;
 
 import crud.packages.exception.ResourceNotFoundException;
+import crud.packages.model.DTO.PlayDTO;
+import crud.packages.model.Entities.Hall;
+import crud.packages.model.Entities.Movie;
 import crud.packages.model.Entities.Play;
+import crud.packages.repository.HallRepository;
+import crud.packages.repository.MovieRepository;
 import crud.packages.repository.PlayRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.ResourceAccessException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -17,6 +23,10 @@ public class PlayController {
 
     @Autowired
     PlayRepository playRepository;
+    @Autowired
+    HallRepository hallRepository;
+    @Autowired
+    MovieRepository movieRepository;
     
 
     @GetMapping("/plays")
@@ -32,18 +42,31 @@ public class PlayController {
     }
 
     @PostMapping("/play/create")
-    public ResponseEntity<Play> createPlay (@Valid @RequestBody Play play) throws ResourceNotFoundException {
+    public ResponseEntity<Play> createPlay (@Valid @RequestBody PlayDTO playDTO) throws ResourceNotFoundException {
+        Movie movie = movieRepository.findById(playDTO.getMovieId())
+                .orElseThrow( () -> new ResourceNotFoundException("Movie not found"));
+        Hall hall = hallRepository.findById(playDTO.getHallId())
+                .orElseThrow( () -> new ResourceNotFoundException("Hall not found"));
+        Play play = new Play();
+        play.setTimeInMinutes(playDTO.getTimeInMinutes());
+        play.setDate(playDTO.getDate());
+        play.setMovie(movie);
+        play.setHall(hall);
         playRepository.save(play);
         return ResponseEntity.ok().body(play);
     }
 
     @PutMapping("/play/edit/{id}")
-    public ResponseEntity<Play> editPlay (@PathVariable(value = "id") Long playId, @Valid @RequestBody Play playDetails) throws ResourceNotFoundException {
+    public ResponseEntity<Play> editPlay (@PathVariable(value = "id") Long playId, @Valid @RequestBody PlayDTO playDetails) throws ResourceNotFoundException {
         Play play = playRepository.findById(playId)
                 .orElseThrow ( () -> new ResourceNotFoundException("Play not found for this id :: " + playId));
+        Movie movie = movieRepository.findById(playDetails.getMovieId())
+                .orElseThrow( () -> new ResourceNotFoundException("Movie not found"));
+        Hall hall = hallRepository.findById(playDetails.getHallId())
+                .orElseThrow( () -> new ResourceNotFoundException("Hall not found"));
         play.setDate(playDetails.getDate());
-        play.setHallId(playDetails.getHallId());
-        play.setMovieId(playDetails.getMovieId());
+        play.setHall(hall);
+        play.setMovie(movie);
         play.setTimeInMinutes(playDetails.getTimeInMinutes());
         final Play updatedPlay = playRepository.save(play);
         return ResponseEntity.ok().body(updatedPlay);

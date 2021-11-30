@@ -1,6 +1,8 @@
 package crud.packages.model.Entities;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -13,19 +15,11 @@ public class Play {
     private long id;
     private Date date;
     private int timeInMinutes;
-    private long movieId;
-    private long hallId;
+    private Movie movie;
+    private Hall hall;
 
-    public Play() {
-    }
+    public Play() {}
 
-    public Play(long id, Date date, int timeInMinutes, long movieId, long hallId) {
-        this.id = id;
-        this.date = date;
-        this.timeInMinutes = timeInMinutes;
-        this.movieId = movieId;
-        this.hallId = hallId;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,19 +46,22 @@ public class Play {
         this.timeInMinutes = timeInMinutes;
     }
 
-    @Column(name = "movie_id")
-    public long getMovieId() {
-        return movieId;
+    @ManyToOne(optional = false)
+    @JoinColumn (name = "movie_id", nullable = false, updatable = true)
+    public Movie getMovie() {
+        return movie;
     }
-    public void setMovieId(long movieId) {
-        this.movieId = movieId;
+    public void setMovie(Movie movie) {
+        this.movie = movie;
     }
 
-    @Column(name = "hall_id")
-    public long getHallId() {
-        return hallId;
+    @ManyToOne(optional = false)
+    @JoinColumn (name = "hall_id", nullable = false, updatable = true)
+    @JsonIgnoreProperties("programme")
+    public Hall getHall() {
+        return hall;
     }
-    public void setHallId(long hallId) {
-        this.hallId = hallId;
+    public void setHall(Hall hall) {
+        this.hall = hall;
     }
 }

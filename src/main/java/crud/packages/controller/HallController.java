@@ -4,8 +4,6 @@ import crud.packages.exception.ResourceNotFoundException;
 import crud.packages.model.DTO.HallDTO;
 import crud.packages.model.Entities.Branch;
 import crud.packages.model.Entities.Hall;
-import crud.packages.model.Info.BranchInfo;
-import crud.packages.model.Info.HallInfo;
 import crud.packages.repository.BranchRepository;
 import crud.packages.repository.HallRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,31 +37,25 @@ public class HallController {
         return ResponseEntity.ok().body(hall);
     }
 
-//    @GetMapping("/hall/{id}/branch")
-//    public ResponseEntity<Branch> getHallBranch (@PathVariable(value = "id") Long hallId) throws ResourceNotFoundException {
-//        Branch branch = hallRepository.getHallBranch(hallId);
-//        return ResponseEntity.ok().body(branch);
-//    }
-
     @PostMapping("/hall/create")
     public ResponseEntity<Hall> createHall (@Valid @RequestBody HallDTO hallDTO) throws ResourceNotFoundException {
         Branch branch = branchRepository.findById((long)hallDTO.getBranchId())
                         .orElseThrow( () -> new ResourceNotFoundException("Branch not found"));
-
         Hall hall = new Hall();
         hall.setHallSize(hallDTO.getHallSize());
         hall.setBranch(branch);
         hallRepository.save(hall);
-//        hall.getBranch().setHalls(null);
         return ResponseEntity.ok().body(hall);
     }
 
     @PutMapping("/hall/edit/{id}")
-    public ResponseEntity<Hall> editHall (@PathVariable(value = "id") Long hallId, @Valid @RequestBody Hall hallDetails) throws ResourceNotFoundException {
+    public ResponseEntity<Hall> editHall (@PathVariable(value = "id") Long hallId, @Valid @RequestBody HallDTO hallDetails) throws ResourceNotFoundException {
         Hall hall = hallRepository.findById(hallId)
                 .orElseThrow ( () -> new ResourceNotFoundException("Hall not found for this id :: " + hallId));
+        Branch branch = branchRepository.findById(hallDetails.getBranchId())
+                        .orElseThrow( () -> new ResourceNotFoundException("Branch not found"));
         hall.setHallSize(hallDetails.getHallSize());
-        hall.setBranch(hallDetails.getBranch());
+        hall.setBranch(branch);
         final Hall updatedHall = hallRepository.save(hall);
         return ResponseEntity.ok().body(updatedHall);
     }

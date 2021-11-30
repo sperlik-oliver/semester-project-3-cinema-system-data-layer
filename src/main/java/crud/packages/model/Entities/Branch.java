@@ -3,7 +3,6 @@ package crud.packages.model.Entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import crud.packages.model.DTO.HallDTO;
-import crud.packages.model.Info.HallInfo;
 
 import javax.persistence.*;
 import java.util.Set;

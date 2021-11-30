@@ -4,7 +4,6 @@ import crud.packages.exception.ResourceNotFoundException;
 import crud.packages.model.DTO.BranchDTO;
 import crud.packages.model.Entities.Branch;
 import crud.packages.model.Entities.Hall;
-import crud.packages.model.Info.HallInfo;
 
 import crud.packages.repository.BranchRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +52,7 @@ public class BranchController {
         }
 
         @PutMapping("/branch/edit/{id}")
-        public ResponseEntity<Branch> editBranch (@PathVariable(value = "id") Long branchId, @Valid @RequestBody Branch branchDetails) throws ResourceNotFoundException {
+        public ResponseEntity<Branch> editBranch (@PathVariable(value = "id") Long branchId, @Valid @RequestBody BranchDTO branchDetails) throws ResourceNotFoundException {
             Branch branch = branchRepository.findById(branchId)
                     .orElseThrow ( () -> new ResourceNotFoundException("Branch not found for this id :: " + branchId));
             branch.setCity(branchDetails.getCity());

@@ -4,7 +4,7 @@ import crud.packages.model.Entities.Branch;
 
 public class HallDTO {
     private int hallSize;
-    private int branchId;
+    private long branchId;
 
     public HallDTO() {
     }
@@ -23,11 +23,11 @@ public class HallDTO {
         this.hallSize = hallSize;
     }
 
-    public int getBranchId() {
+    public long getBranchId() {
         return branchId;
     }
 
-    public void setBranchId(int branchId) {
+    public void setBranchId(long branchId) {
         this.branchId = branchId;
     }
 }
