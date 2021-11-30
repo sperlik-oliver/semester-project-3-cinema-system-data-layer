@@ -18,7 +18,7 @@ public class Play {
     private int timeInMinutes;
     private Movie movie;
     private Hall hall;
-    private Set<Ticket> tickets;
+//    private Set<Ticket> tickets;
 
     public Play() {}
 
@@ -67,12 +67,12 @@ public class Play {
         this.hall = hall;
     }
 
-    @OneToMany(mappedBy = "play")
-    @JsonIgnoreProperties("play")
-    public Set<Ticket> getTickets() {
-        return tickets;
-    }
-    public void setTickets(Set<Ticket> tickets) {
-        this.tickets = tickets;
-    }
+//    @OneToMany(mappedBy = "play")
+//    @JsonIgnoreProperties("play")
+//    public Set<Ticket> getTickets() {
+//        return tickets;
+//    }
+//    public void setTickets(Set<Ticket> tickets) {
+//        this.tickets = tickets;
+//    }
 }
