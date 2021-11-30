@@ -77,7 +77,7 @@ public class Branch {
         this.country = country;
     }
 
-    @OneToMany(mappedBy = "branch", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "branch")
     @JsonIgnoreProperties("branch")
     public Set<Hall> getHalls () {return halls;}
     public void setHalls(Set<Hall> halls) {this.halls = halls;}

@@ -43,7 +43,7 @@ public class Hall {
         this.hallSize = hallSize;
     }
 
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     @JoinColumn (name = "branch_id", nullable = false, updatable = true)
     @JsonIgnoreProperties("halls")
     public Branch getBranch() {
