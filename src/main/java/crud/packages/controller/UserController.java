@@ -45,6 +45,7 @@ public class UserController {
 	public ResponseEntity<User> getUserById(@PathVariable(value = "id") Long userId) throws ResourceNotFoundException {
 		User user = userRepository.findById(userId)
 				.orElseThrow(() -> new ResourceNotFoundException("User not found for this id :: " + userId));
+		user.setPassword("");
 		return ResponseEntity.ok().body(user);
 	}
 

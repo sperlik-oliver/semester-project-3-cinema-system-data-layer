@@ -48,7 +48,7 @@ public class Ticket {
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "employee_id", nullable = true, updatable = true)
-    @JsonIgnoreProperties({"soldTickets", "branch"})
+    @JsonIgnoreProperties({"soldTickets", "branch", "password"})
     public Employee getEmployee() {
         return employee;
     }
@@ -59,7 +59,7 @@ public class Ticket {
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "user_id", nullable = true, updatable = true)
-    @JsonIgnoreProperties("purchasedTickets")
+    @JsonIgnoreProperties({"purchasedTickets", "password"})
     public User getUser() {
         return user;
     }

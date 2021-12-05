@@ -71,7 +71,7 @@ public class Branch {
     public void setHalls(Set<Hall> halls) {this.halls = halls;}
 
     @OneToMany(mappedBy = "branch")
-    @JsonIgnoreProperties({"branch", "soldTickets"})
+    @JsonIgnoreProperties({"branch", "soldTickets", "password"})
     public Set<Employee> getEmployees() {
         return employees;
     }

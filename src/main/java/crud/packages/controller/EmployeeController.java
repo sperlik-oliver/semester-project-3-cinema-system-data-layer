@@ -11,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -24,13 +25,19 @@ public class EmployeeController {
 
     @GetMapping("/employees")
     public ResponseEntity<List<Employee>> getAllEmployees() {
-        return ResponseEntity.ok().body(employeeRepository.findAll());
+        List<Employee> employees = new ArrayList<>();
+        for (Employee employee : employeeRepository.findAll()) {
+            employee.setPassword("");
+            employees.add(employee);
+        }
+        return ResponseEntity.ok().body(employees);
     }
 
     @GetMapping("/employee/{id}")
     public ResponseEntity<Employee> getEmployee(@PathVariable (value = "id") Long employeeId) throws ResourceNotFoundException {
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow( () -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
+        employee.setPassword("");
         return ResponseEntity.ok().body(employee);
     }
 
@@ -53,6 +60,7 @@ public class EmployeeController {
         employee.setBranch(branch);
 
         employeeRepository.save(employee);
+        employee.setPassword("");
         return ResponseEntity.ok().body(employee);
     }
 
@@ -77,6 +85,7 @@ public class EmployeeController {
 
 
         final Employee updatedEmployee = employeeRepository.save(employee);
+        updatedEmployee.setPassword("");
         return ResponseEntity.ok().body(updatedEmployee);
     }
 
