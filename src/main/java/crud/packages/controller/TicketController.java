@@ -52,9 +52,9 @@ public class TicketController {
         Play play = playRepository.findById(ticketDTO.getPlayId())
                 .orElseThrow( () -> new ResourceNotFoundException("Play not found for this id :: " + ticketDTO.getPlayId()));
             Employee employee = employeeRepository.findById(ticketDTO.getEmployeeId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + ticketDTO.getEmployeeId()));
+                    .orElse(null);
             User user = userRepository.findById(ticketDTO.getUserId())
-                    .orElseThrow(() -> new ResourceNotFoundException("User not found" + ticketDTO.getUserId()));
+                    .orElse(null);
         Ticket ticket = new Ticket();
         ticket.setColumn(ticketDTO.getColumn());
         ticket.setRow(ticketDTO.getRow());
