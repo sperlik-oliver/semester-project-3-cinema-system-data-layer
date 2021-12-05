@@ -7,8 +7,10 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
-//TODO create method to retrieve tickets, hall and movie
-//TODO dont return password in user
+//TODO don't return password in user
+//TODO check edits
+//TODO check model
+//TODO login
 
 @Entity
 @Table(name = "plays")

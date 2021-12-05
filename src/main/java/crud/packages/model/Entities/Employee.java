@@ -10,7 +10,6 @@ import java.util.Set;
 @Table (name = "employees")
 public class Employee {
 
-//TODO make method to retrieve branch and sold tickets
 
     private long id;
     private String firstName;

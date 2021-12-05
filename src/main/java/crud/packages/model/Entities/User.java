@@ -6,7 +6,6 @@ import javax.persistence.*;
 import java.util.Set;
 
 
-//TODO create method to retrieve tickets purchased
 
 @Entity
 @Table(name = "users")
@@ -55,6 +54,7 @@ public class User {
 		this.email = email;
 	}
 
+	@JsonIgnoreProperties("password")
 	@Column(name = "password", nullable = false)
 	public String getPassword() {
 		return password;
