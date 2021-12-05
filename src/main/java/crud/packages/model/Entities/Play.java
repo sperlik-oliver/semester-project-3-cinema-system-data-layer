@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Set;
 
 //TODO create method to retrieve tickets, hall and movie
+//TODO dont return password in user
 
 @Entity
 @Table(name = "plays")
@@ -59,7 +60,7 @@ public class Play {
 
     @ManyToOne(optional = false)
     @JoinColumn (name = "hall_id", nullable = false, updatable = true)
-    @JsonIgnoreProperties("programme")
+    @JsonIgnoreProperties({"programme, branch"})
     public Hall getHall() {
         return hall;
     }
