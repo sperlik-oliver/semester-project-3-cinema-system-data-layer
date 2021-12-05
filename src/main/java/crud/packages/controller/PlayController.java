@@ -44,12 +44,12 @@ public class PlayController {
     @PostMapping("/play/create")
     public ResponseEntity<Play> createPlay (@Valid @RequestBody PlayDTO playDTO) throws ResourceNotFoundException {
         Movie movie = movieRepository.findById(playDTO.getMovieId())
-                .orElseThrow( () -> new ResourceNotFoundException("Movie not found"));
+                .orElseThrow( () -> new ResourceNotFoundException("Movie not found for this id :: " + playDTO.getMovieId()));
         Hall hall = hallRepository.findById(playDTO.getHallId())
-                .orElseThrow( () -> new ResourceNotFoundException("Hall not found"));
+                .orElseThrow( () -> new ResourceNotFoundException("Hall not found for this id :: " + playDTO.getHallId()));
         Play play = new Play();
-        play.setTimeInMinutes(playDTO.getTimeInMinutes());
         play.setDate(playDTO.getDate());
+        play.setTimeInMinutes(playDTO.getTimeInMinutes());
         play.setMovie(movie);
         play.setHall(hall);
         playRepository.save(play);
@@ -61,13 +61,13 @@ public class PlayController {
         Play play = playRepository.findById(playId)
                 .orElseThrow ( () -> new ResourceNotFoundException("Play not found for this id :: " + playId));
         Movie movie = movieRepository.findById(playDetails.getMovieId())
-                .orElseThrow( () -> new ResourceNotFoundException("Movie not found"));
+                .orElseThrow( () -> new ResourceNotFoundException("Movie not found for this id :: " + playDetails.getMovieId()));
         Hall hall = hallRepository.findById(playDetails.getHallId())
-                .orElseThrow( () -> new ResourceNotFoundException("Hall not found"));
+                .orElseThrow( () -> new ResourceNotFoundException("Hall not found for this id :: " + playDetails.getHallId()));
         play.setDate(playDetails.getDate());
-        play.setHall(hall);
-        play.setMovie(movie);
         play.setTimeInMinutes(playDetails.getTimeInMinutes());
+        play.setMovie(movie);
+        play.setHall(hall);
         final Play updatedPlay = playRepository.save(play);
         return ResponseEntity.ok().body(updatedPlay);
     }

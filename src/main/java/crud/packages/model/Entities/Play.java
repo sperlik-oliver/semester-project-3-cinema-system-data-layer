@@ -7,10 +7,10 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
-//TODO don't return password in user
-//TODO check edits
-//TODO check model
-//TODO login
+//TODO soft delete
+//TODO hash passwords
+//TODO sanitize input
+//TODO maybe cascade delete
 
 @Entity
 @Table(name = "plays")
@@ -19,6 +19,7 @@ public class Play {
     private long id;
     private Date date;
     private int timeInMinutes;
+    private double price;
     private Movie movie;
     private Hall hall;
     private Set<Ticket> tickets;
@@ -49,6 +50,14 @@ public class Play {
     }
     public void setTimeInMinutes(int timeInMinutes) {
         this.timeInMinutes = timeInMinutes;
+    }
+
+    @Column(name = "price", nullable = false)
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     @ManyToOne(optional = false)

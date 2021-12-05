@@ -1,4 +1,4 @@
-package crud.packages.model;
+package crud.packages.model.DTO;
 
 public class Login {
     private String email;
@@ -8,9 +8,6 @@ public class Login {
 
     }
 
-    public Login (String email, String password) {
-
-    }
 
     public String getEmail() {
         return email;
@@ -22,7 +19,6 @@ public class Login {
     public String getPassword() {
         return password;
     }
-
     public void setPassword(String password) {
         this.password = password;
     }

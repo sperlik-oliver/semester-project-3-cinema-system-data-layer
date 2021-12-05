@@ -23,9 +23,8 @@ public class Employee {
     private String postcode;
     private String country;
     private Date birthday;
-    private Set<Ticket> soldTickets;
     private Branch branch;
-    
+    private Set<Ticket> soldTickets;
 
     public Employee() {
     }

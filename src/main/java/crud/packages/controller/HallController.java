@@ -39,8 +39,8 @@ public class HallController {
 
     @PostMapping("/hall/create")
     public ResponseEntity<Hall> createHall (@Valid @RequestBody HallDTO hallDTO) throws ResourceNotFoundException {
-        Branch branch = branchRepository.findById((long)hallDTO.getBranchId())
-                        .orElseThrow( () -> new ResourceNotFoundException("Branch not found"));
+        Branch branch = branchRepository.findById(hallDTO.getBranchId())
+                        .orElseThrow( () -> new ResourceNotFoundException("Branch not found for this id " + hallDTO.getBranchId()));
         Hall hall = new Hall();
         hall.setHallSize(hallDTO.getHallSize());
         hall.setBranch(branch);
@@ -51,9 +51,9 @@ public class HallController {
     @PutMapping("/hall/edit/{id}")
     public ResponseEntity<Hall> editHall (@PathVariable(value = "id") Long hallId, @Valid @RequestBody HallDTO hallDetails) throws ResourceNotFoundException {
         Hall hall = hallRepository.findById(hallId)
-                .orElseThrow ( () -> new ResourceNotFoundException("Hall not found for this id :: " + hallId));
+                        .orElseThrow ( () -> new ResourceNotFoundException("Hall not found for this id :: " + hallId));
         Branch branch = branchRepository.findById(hallDetails.getBranchId())
-                        .orElseThrow( () -> new ResourceNotFoundException("Branch not found"));
+                        .orElseThrow( () -> new ResourceNotFoundException("Branch not found for this id :: " + hallDetails.getBranchId()));
         hall.setHallSize(hallDetails.getHallSize());
         hall.setBranch(branch);
         final Hall updatedHall = hallRepository.save(hall);

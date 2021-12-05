@@ -7,7 +7,7 @@ import javax.validation.Valid;
 
 import crud.packages.model.DTO.UserDTO;
 
-import crud.packages.model.Login;
+import crud.packages.model.DTO.Login;
 import crud.packages.repository.UserRepository;
 import crud.packages.model.Entities.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,7 +69,7 @@ public class UserController {
 					user.setPassword("");
 					return ResponseEntity.ok().body(user);
 				}
-				throw new ResourceNotFoundException("Incorrect credentails ");
+				throw new ResourceNotFoundException("Incorrect credentials");
 			}
 			throw new ResourceNotFoundException("User not found for this email :: " + loginDetails.getEmail());
 		}

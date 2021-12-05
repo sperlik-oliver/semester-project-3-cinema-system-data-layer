@@ -2,8 +2,10 @@ package crud.packages.controller;
 
 import crud.packages.exception.ResourceNotFoundException;
 import crud.packages.model.DTO.EmployeeDTO;
+import crud.packages.model.DTO.Login;
 import crud.packages.model.Entities.Branch;
 import crud.packages.model.Entities.Employee;
+import crud.packages.model.Entities.User;
 import crud.packages.repository.BranchRepository;
 import crud.packages.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,17 +50,16 @@ public class EmployeeController {
                         .orElseThrow( () -> new ResourceNotFoundException("Branch not found for this id :: " + employeeDTO.getBranchId()));
         employee.setFirstName(employeeDTO.getFirstName());
         employee.setLastName(employeeDTO.getLastName());
-        employee.setBirthday(employeeDTO.getBirthday());
-        employee.setCpr(employeeDTO.getCpr());
+        employee.setEmail(employeeDTO.getEmail());
         employee.setPassword(employeeDTO.getPassword());
         employee.setRole(employeeDTO.getRole());
+        employee.setCpr(employeeDTO.getCpr());
         employee.setStreet(employeeDTO.getStreet());
         employee.setCity(employeeDTO.getCity());
         employee.setPostcode(employeeDTO.getPostcode());
         employee.setCountry(employeeDTO.getCountry());
-        employee.setEmail(employeeDTO.getEmail());
+        employee.setBirthday(employeeDTO.getBirthday());
         employee.setBranch(branch);
-
         employeeRepository.save(employee);
         employee.setPassword("");
         return ResponseEntity.ok().body(employee);
@@ -95,5 +96,20 @@ public class EmployeeController {
                 .orElseThrow( () -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
         employeeRepository.delete(employee);
         return ResponseEntity.ok().body(true);
+    }
+
+    @PostMapping("/employee/login")
+    public ResponseEntity<Employee> loginUser(@Valid @RequestBody Login loginDetails) throws ResourceNotFoundException {
+        Employee employee = employeeRepository.getEmployeeByEmail(loginDetails.getEmail()); {
+            if (employee != null) {
+                if (loginDetails.getPassword().equals(employee.getPassword())) {
+                    employee.setPassword("");
+                    return ResponseEntity.ok().body(employee);
+                }
+                throw new ResourceNotFoundException("Incorrect credentials");
+            }
+            throw new ResourceNotFoundException("Employee not found for this email :: " + loginDetails.getEmail());
+        }
+
     }
 }

@@ -51,10 +51,10 @@ public class TicketController {
     public ResponseEntity<Ticket> createTicket (@Valid @RequestBody TicketDTO ticketDTO) throws ResourceNotFoundException {
         Play play = playRepository.findById(ticketDTO.getPlayId())
                 .orElseThrow( () -> new ResourceNotFoundException("Play not found for this id :: " + ticketDTO.getPlayId()));
-            Employee employee = employeeRepository.findById(ticketDTO.getEmployeeId())
-                    .orElse(null);
-            User user = userRepository.findById(ticketDTO.getUserId())
-                    .orElse(null);
+        Employee employee = employeeRepository.findById(ticketDTO.getEmployeeId())
+                .orElse(null);
+        User user = userRepository.findById(ticketDTO.getUserId())
+                .orElse(null);
         Ticket ticket = new Ticket();
         ticket.setColumn(ticketDTO.getColumn());
         ticket.setRow(ticketDTO.getRow());
@@ -69,13 +69,17 @@ public class TicketController {
     public ResponseEntity<Ticket> editTicket (@PathVariable(value = "id") Long ticketId, @Valid @RequestBody TicketDTO ticketDetails) throws ResourceNotFoundException {
         Ticket ticket = ticketRepository.findById(ticketId)
                 .orElseThrow ( () -> new ResourceNotFoundException("Ticket not found for this id :: " + ticketId));
+        Employee employee = employeeRepository.findById(ticketDetails.getEmployeeId())
+                .orElse(null);
+        User user = userRepository.findById(ticketDetails.getUserId())
+                .orElse(null);
         Play play = playRepository.findById(ticketDetails.getPlayId())
-                .orElseThrow( () -> new ResourceNotFoundException("Play not found"));
+                .orElse(null);
         ticket.setRow(ticketDetails.getRow());
         ticket.setColumn(ticketDetails.getColumn());
         ticket.setPlay(play);
-//        ticket.setUserId(ticketDetails.getUserId());
-//        ticket.setEmployeeId(ticketDetails.getEmployeeId());
+        ticket.setEmployee(employee);
+        ticket.setUser(user);
         final Ticket updatedTicket = ticketRepository.save(ticket);
         return ResponseEntity.ok().body(updatedTicket);
     }
