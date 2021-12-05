@@ -54,7 +54,6 @@ public class User {
 		this.email = email;
 	}
 
-	@JsonIgnoreProperties("password")
 	@Column(name = "password", nullable = false)
 	public String getPassword() {
 		return password;

@@ -1,10 +1,12 @@
 package crud.packages.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.validation.Valid;
 
 import crud.packages.model.DTO.UserDTO;
+import crud.packages.model.DTO.UserInfo;
 import crud.packages.model.Login;
 import crud.packages.repository.UserRepository;
 import crud.packages.model.Entities.User;
@@ -30,7 +32,13 @@ public class UserController {
 
 	@GetMapping("/users")
 	public ResponseEntity<List<User>> getAllUsers() {
-		return ResponseEntity.ok().body(userRepository.findAll());
+		List<User> users = new ArrayList<>();
+		for (User user : userRepository.findAll()) {
+			user.setPassword("");
+			users.add(user);
+		}
+		return ResponseEntity.ok().body(users);
+
 	}
 
 	@GetMapping("/user/{id}")
@@ -48,6 +56,7 @@ public class UserController {
 		user.setEmail(userDto.getEmail());
 		user.setPassword(userDto.getPassword());
 		userRepository.save(user);
+		user.setPassword("");
 		return ResponseEntity.ok().body(user);
 	}
 
@@ -56,7 +65,8 @@ public class UserController {
 		User user = userRepository.getUserByEmail(loginDetails.getEmail()); {
 			if (user != null) {
 				if (loginDetails.getPassword().equals(user.getPassword())) {
-					return ResponseEntity.ok(user);
+					user.setPassword("");
+					return ResponseEntity.ok().body(user);
 				}
 				throw new ResourceNotFoundException("Incorrect credentails ");
 			}
@@ -76,6 +86,7 @@ public class UserController {
 		user.setFirstName(userDetails.getFirstName());
 		user.setPassword(userDetails.getPassword());
 		final User updatedUser = userRepository.save(user);
+		updatedUser.setPassword("");
 		return ResponseEntity.ok().body(updatedUser);
 	}
 
