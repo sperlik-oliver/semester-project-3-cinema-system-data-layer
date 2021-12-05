@@ -6,7 +6,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import crud.packages.model.DTO.UserDTO;
-import crud.packages.model.DTO.UserInfo;
+
 import crud.packages.model.Login;
 import crud.packages.repository.UserRepository;
 import crud.packages.model.Entities.User;
