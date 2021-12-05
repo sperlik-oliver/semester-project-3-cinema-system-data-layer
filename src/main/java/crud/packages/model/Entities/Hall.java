@@ -44,7 +44,7 @@ public class Hall {
 
     @ManyToOne(optional = false)
     @JoinColumn (name = "branch_id", nullable = false, updatable = true)
-    @JsonIgnoreProperties("halls")
+    @JsonIgnoreProperties({"halls", "employees"})
     public Branch getBranch() {
         return branch;
     }
