@@ -64,7 +64,7 @@ public class User {
 	}
 
 	@OneToMany(mappedBy = "user")
-	@JsonIgnoreProperties("user")
+	@JsonIgnoreProperties({"user", "employee", "play"})
 	public Set<Ticket> getPurchasedTickets() {
 		return purchasedTickets;
 	}

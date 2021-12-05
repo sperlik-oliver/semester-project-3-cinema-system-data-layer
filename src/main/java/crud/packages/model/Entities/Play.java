@@ -32,7 +32,7 @@ public class Play {
         this.id = id;
     }
 
-    @Column(name = "date")
+    @Column(name = "date", nullable = false)
     public Date getDate() {
         return date;
     }
@@ -40,7 +40,7 @@ public class Play {
         this.date = date;
     }
 
-    @Column(name = "time_in_minutes")
+    @Column(name = "time_in_minutes", nullable = false)
     public int getTimeInMinutes() {
         return timeInMinutes;
     }
@@ -68,7 +68,7 @@ public class Play {
     }
 
     @OneToMany(mappedBy = "play")
-    @JsonIgnoreProperties("play")
+    @JsonIgnoreProperties({"play", "user", "employee"})
     public Set<Ticket> getTickets() {
         return tickets;
     }

@@ -130,7 +130,7 @@ public class Employee {
     }
 
     @OneToMany(mappedBy = "employee")
-    @JsonIgnoreProperties("employee")
+    @JsonIgnoreProperties({"employee", "user", "play"})
     public Set<Ticket> getSoldTickets() {
         return soldTickets;
     }
@@ -140,7 +140,7 @@ public class Employee {
 
     @ManyToOne (optional = false)
     @JoinColumn (name = "branch_id", nullable = false, updatable = true)
-    @JsonIgnoreProperties("employees")
+    @JsonIgnoreProperties({"employees", "halls"})
     public Branch getBranch() {
         return branch;
     }

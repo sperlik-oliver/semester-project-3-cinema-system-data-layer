@@ -26,19 +26,6 @@ public class Movie {
     public Movie() {
     }
 
-    public Movie(long id, String title, String description, String genre, String director, String language, String subtitleLanguage, int lengthInMinutes, int year, String posterSrc) {
-        this.id = id;
-        this.title = title;
-        this.description = description;
-        this.genre = genre;
-        this.director = director;
-        this.language = language;
-        this.subtitleLanguage = subtitleLanguage;
-        this.lengthInMinutes = lengthInMinutes;
-        this.year = year;
-        this.posterSrc = posterSrc;
-
-    }
 
     @Id
     @GeneratedValue (strategy = GenerationType.IDENTITY)
@@ -117,19 +104,5 @@ public class Movie {
         this.posterSrc = posterSrc;
     }
 
-    @Override
-    public String toString() {
-        return "Movie{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", description='" + description + '\'' +
-                ", genre='" + genre + '\'' +
-                ", director='" + director + '\'' +
-                ", language='" + language + '\'' +
-                ", subtitleLanguage='" + subtitleLanguage + '\'' +
-                ", lengthInMinutes=" + lengthInMinutes +
-                ", year=" + year +
-                ", posterSrc='" + posterSrc + '\'' +
-                '}';
-    }
+
 }

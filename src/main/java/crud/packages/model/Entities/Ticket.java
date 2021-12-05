@@ -31,7 +31,7 @@ public class Ticket {
         this.id = id;
     }
 
-    @Column(name = "_row")
+    @Column(name = "_row", nullable = false)
     public int getRow() {
         return row;
     }
@@ -39,7 +39,7 @@ public class Ticket {
         this.row = row;
     }
 
-    @Column(name = "_column")
+    @Column(name = "_column", nullable = false)
     public int getColumn() {
         return column;
     }
@@ -49,7 +49,7 @@ public class Ticket {
 
     @ManyToOne(optional = true)
     @JoinColumn(name = "employee_id", nullable = true, updatable = true)
-    @JsonIgnoreProperties("soldTickets")
+    @JsonIgnoreProperties({"soldTickets", "branch"})
     public Employee getEmployee() {
         return employee;
     }
@@ -70,7 +70,7 @@ public class Ticket {
 
     @ManyToOne(optional = false)
     @JoinColumn (name = "play_id", nullable = false, updatable = true)
-    @JsonIgnoreProperties("tickets")
+    @JsonIgnoreProperties({"tickets", "hall"})
     public Play getPlay() {
         return play;
     }

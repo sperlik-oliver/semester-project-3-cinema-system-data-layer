@@ -1,12 +1,11 @@
 package crud.packages.model.Entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.util.Set;
 
-//TODO make method to retrieve plays of hall and branch
 
 @Entity
 @Table(name = "halls")
@@ -35,7 +34,7 @@ public class Hall {
         this.id = id;
     }
 
-    @Column (name = "hall_size")
+    @Column (name = "hall_size", nullable = false)
     public int getHallSize() {
         return hallSize;
     }
@@ -54,7 +53,7 @@ public class Hall {
     }
 
     @OneToMany(mappedBy = "hall")
-    @JsonIgnoreProperties("hall")
+    @JsonIgnoreProperties({"hall", "tickets"})
     public Set<Play> getProgramme() {
         return programme;
     }

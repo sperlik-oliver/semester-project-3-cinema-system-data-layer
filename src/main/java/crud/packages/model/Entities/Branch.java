@@ -1,16 +1,11 @@
 package crud.packages.model.Entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import crud.packages.model.DTO.HallDTO;
 
 import javax.persistence.*;
 import java.util.Set;
 
 
-//TODO create method to retrieve halls and employees and to cascade delete hall
-
-//TODO for all classes :: decide which fields are nullable
 
 @Entity
 @Table(name = "branches")
@@ -38,7 +33,7 @@ public class Branch {
         this.id = id;
     }
 
-    @Column (name = "street")
+    @Column (name = "street", nullable = false)
     public String getStreet() {
         return street;
     }
@@ -46,7 +41,7 @@ public class Branch {
         this.street = street;
     }
 
-    @Column (name = "city")
+    @Column (name = "city", nullable = false)
     public String getCity() {
         return city;
     }
@@ -54,7 +49,7 @@ public class Branch {
         this.city = city;
     }
 
-    @Column (name = "postcode")
+    @Column (name = "postcode", nullable = false)
     public String getPostcode() {
         return postcode;
     }
@@ -62,7 +57,7 @@ public class Branch {
         this.postcode = postcode;
     }
 
-    @Column (name = "country")
+    @Column (name = "country", nullable = false)
     public String getCountry() {
         return country;
     }
@@ -71,7 +66,7 @@ public class Branch {
     }
 
     @OneToMany(mappedBy = "branch")
-    @JsonIgnoreProperties("branch")
+    @JsonIgnoreProperties({"branch", "plays"})
     public Set<Hall> getHalls () {return halls;}
     public void setHalls(Set<Hall> halls) {this.halls = halls;}
 
