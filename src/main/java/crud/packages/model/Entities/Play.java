@@ -60,7 +60,7 @@ public class Play {
 
     @ManyToOne(optional = false)
     @JoinColumn (name = "hall_id", nullable = false, updatable = true)
-    @JsonIgnoreProperties({"branch, programme"})
+    @JsonIgnoreProperties({"branch", "programme"})
     public Hall getHall() {
         return hall;
     }
