@@ -22,6 +22,7 @@ public class EmployeeDTO {
     private String postcode;
     private String country;
     private Date birthday;
+    private long branchId;
 
 
 
@@ -117,5 +118,10 @@ public class EmployeeDTO {
         this.birthday = birthday;
     }
 
-
+    public long getBranchId() {
+        return branchId;
+    }
+    public void setBranchId(long branchId) {
+        this.branchId = branchId;
+    }
 }

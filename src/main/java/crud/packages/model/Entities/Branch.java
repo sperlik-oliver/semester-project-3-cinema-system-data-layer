@@ -22,18 +22,12 @@ public class Branch {
     private String postcode;
     private String country;
     private Set<Hall> halls;
+    private Set<Employee> employees;
 
 
     public Branch() {
     }
 
-    public Branch(long id, String street, String city, String postcode, String country) {
-        this.id = id;
-        this.street = street;
-        this.city = city;
-        this.postcode = postcode;
-        this.country = country;
-    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -81,5 +75,12 @@ public class Branch {
     public Set<Hall> getHalls () {return halls;}
     public void setHalls(Set<Hall> halls) {this.halls = halls;}
 
-
+    @OneToMany(mappedBy = "branch")
+    @JsonIgnoreProperties("branch")
+    public Set<Employee> getEmployees() {
+        return employees;
+    }
+    public void setEmployees(Set<Employee> employees) {
+        this.employees = employees;
+    }
 }

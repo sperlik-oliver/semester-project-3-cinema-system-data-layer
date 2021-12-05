@@ -25,7 +25,7 @@ public class Employee {
     private String country;
     private Date birthday;
     private Set<Ticket> soldTickets;
-//    private long branchId;
+    private Branch branch;
     
 
     public Employee() {
@@ -136,5 +136,15 @@ public class Employee {
     }
     public void setSoldTickets(Set<Ticket> soldTickets) {
         this.soldTickets = soldTickets;
+    }
+
+    @ManyToOne (optional = false)
+    @JoinColumn (name = "branch_id", nullable = false, updatable = true)
+    @JsonIgnoreProperties("employees")
+    public Branch getBranch() {
+        return branch;
+    }
+    public void setBranch(Branch branch) {
+        this.branch = branch;
     }
 }

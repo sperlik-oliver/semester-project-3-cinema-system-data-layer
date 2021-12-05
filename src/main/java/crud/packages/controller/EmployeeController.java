@@ -2,7 +2,9 @@ package crud.packages.controller;
 
 import crud.packages.exception.ResourceNotFoundException;
 import crud.packages.model.DTO.EmployeeDTO;
+import crud.packages.model.Entities.Branch;
 import crud.packages.model.Entities.Employee;
+import crud.packages.repository.BranchRepository;
 import crud.packages.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +18,9 @@ import java.util.List;
 public class EmployeeController {
 
     @Autowired
-    private EmployeeRepository employeeRepository;
+    EmployeeRepository employeeRepository;
+    @Autowired
+    BranchRepository branchRepository;
 
     @GetMapping("/employees")
     public ResponseEntity<List<Employee>> getAllEmployees() {
@@ -33,6 +37,8 @@ public class EmployeeController {
     @PostMapping("/employee/create")
     public ResponseEntity<Employee> createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) throws ResourceNotFoundException {
         Employee employee = new Employee();
+        Branch branch = branchRepository.findById(employeeDTO.getBranchId())
+                        .orElseThrow( () -> new ResourceNotFoundException("Branch not found for this id :: " + employeeDTO.getBranchId()));
         employee.setFirstName(employeeDTO.getFirstName());
         employee.setLastName(employeeDTO.getLastName());
         employee.setBirthday(employeeDTO.getBirthday());
@@ -44,14 +50,18 @@ public class EmployeeController {
         employee.setPostcode(employeeDTO.getPostcode());
         employee.setCountry(employeeDTO.getCountry());
         employee.setEmail(employeeDTO.getEmail());
+        employee.setBranch(branch);
+
         employeeRepository.save(employee);
         return ResponseEntity.ok().body(employee);
     }
 
     @PutMapping("/employee/edit/{id}")
-    public ResponseEntity<Employee> editEmployee(@PathVariable (value = "id") Long employeeId, @Valid @RequestBody Employee employeeDetails) throws ResourceNotFoundException {
+    public ResponseEntity<Employee> editEmployee(@PathVariable (value = "id") Long employeeId, @Valid @RequestBody EmployeeDTO employeeDetails) throws ResourceNotFoundException {
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow( () -> new ResourceNotFoundException("Employee not found for this :: " + employeeId));
+        Branch branch = branchRepository.findById(employeeDetails.getBranchId())
+                .orElseThrow( () -> new ResourceNotFoundException("Branch not found for this id :: " + employeeDetails.getBranchId()));
         employee.setFirstName(employeeDetails.getFirstName());
         employee.setLastName(employeeDetails.getLastName());
         employee.setEmail(employeeDetails.getEmail());
@@ -63,7 +73,8 @@ public class EmployeeController {
         employee.setPostcode(employeeDetails.getPostcode());
         employee.setCountry(employeeDetails.getCountry());
         employee.setBirthday(employeeDetails.getBirthday());
-//        employee.setBranchId(employeeDetails.getBranchId());
+        employee.setBranch(branch);
+
 
         final Employee updatedEmployee = employeeRepository.save(employee);
         return ResponseEntity.ok().body(updatedEmployee);
