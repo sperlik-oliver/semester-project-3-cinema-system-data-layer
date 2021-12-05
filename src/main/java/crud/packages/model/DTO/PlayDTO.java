@@ -10,16 +10,10 @@ public class PlayDTO {
     private Date date;
     private int timeInMinutes;
     private long movieId;
+    private double price;
     private long hallId;
 
     public PlayDTO() {
-    }
-
-    public PlayDTO(Date date, int timeInMinutes, long movieId, long hallId) {
-        this.date = date;
-        this.timeInMinutes = timeInMinutes;
-        this.movieId = movieId;
-        this.hallId = hallId;
     }
 
 
@@ -49,5 +43,12 @@ public class PlayDTO {
     }
     public void setHallId(long hallId) {
         this.hallId = hallId;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+    public void setPrice(double price) {
+        this.price = price;
     }
 }
