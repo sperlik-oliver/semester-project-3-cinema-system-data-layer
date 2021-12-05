@@ -1,6 +1,7 @@
 package crud.packages.controller;
 
 import crud.packages.exception.ResourceNotFoundException;
+import crud.packages.model.DTO.MovieDTO;
 import crud.packages.model.Entities.Movie;
 import crud.packages.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,13 +31,23 @@ public class MovieController {
     }
 
     @PostMapping("/movie/create")
-    public ResponseEntity<Movie> createMovie (@Valid @RequestBody Movie movie) throws ResourceNotFoundException {
+    public ResponseEntity<Movie> createMovie (@Valid @RequestBody MovieDTO movieDTO) throws ResourceNotFoundException {
+        Movie movie = new Movie();
+        movie.setTitle(movieDTO.getTitle());
+        movie.setDescription(movieDTO.getDescription());
+        movie.setGenre(movieDTO.getGenre());
+        movie.setDirector(movieDTO.getDirector());
+        movie.setLanguage(movieDTO.getLanguage());
+        movie.setSubtitleLanguage(movieDTO.getSubtitleLanguage());
+        movie.setLengthInMinutes(movieDTO.getLengthInMinutes());
+        movie.setYear(movieDTO.getYear());
+        movie.setPosterSrc(movieDTO.getPosterSrc());
         movieRepository.save(movie);
         return ResponseEntity.ok().body(movie);
     }
 
     @PutMapping("/movie/edit/{id}")
-    public ResponseEntity<Movie> editMovie (@PathVariable(value = "id") Long movieId, @Valid @RequestBody Movie movieDetails) throws ResourceNotFoundException {
+    public ResponseEntity<Movie> editMovie (@PathVariable(value = "id") Long movieId, @Valid @RequestBody MovieDTO movieDetails) throws ResourceNotFoundException {
         Movie movie = movieRepository.findById(movieId)
                 .orElseThrow ( () -> new ResourceNotFoundException("Movie not found for this id :: " + movieId));
         movie.setTitle(movieDetails.getTitle());
