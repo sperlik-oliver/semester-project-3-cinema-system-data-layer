@@ -51,16 +51,10 @@ public class TicketController {
     public ResponseEntity<Ticket> createTicket (@Valid @RequestBody TicketDTO ticketDTO) throws ResourceNotFoundException {
         Play play = playRepository.findById(ticketDTO.getPlayId())
                 .orElseThrow( () -> new ResourceNotFoundException("Play not found for this id :: " + ticketDTO.getPlayId()));
-        Employee employee = new Employee();
-        User user = new User();
-        if (ticketDTO.getEmployeeId() != 0) {
-            employee = employeeRepository.findById(ticketDTO.getEmployeeId())
+            Employee employee = employeeRepository.findById(ticketDTO.getEmployeeId())
                     .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + ticketDTO.getEmployeeId()));
-        }
-        if (ticketDTO.getUserId() != 0) {
-            user = userRepository.findById(ticketDTO.getUserId())
+            User user = userRepository.findById(ticketDTO.getUserId())
                     .orElseThrow(() -> new ResourceNotFoundException("User not found" + ticketDTO.getUserId()));
-        }
         Ticket ticket = new Ticket();
         ticket.setColumn(ticketDTO.getColumn());
         ticket.setRow(ticketDTO.getRow());

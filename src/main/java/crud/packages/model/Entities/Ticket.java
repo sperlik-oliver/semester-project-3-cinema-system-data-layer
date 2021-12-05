@@ -3,6 +3,7 @@ package crud.packages.model.Entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.Optional;
 
 //TODO make method to retrieve play, user and employee of ticket
 
