@@ -13,6 +13,7 @@ import crud.packages.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.ResourceAccessException;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -49,18 +50,16 @@ public class TicketController {
     @PostMapping("/ticket/create")
     public ResponseEntity<Ticket> createTicket (@Valid @RequestBody TicketDTO ticketDTO) throws ResourceNotFoundException {
         Play play = playRepository.findById(ticketDTO.getPlayId())
-                .orElseThrow( () -> new ResourceNotFoundException("Play not found"));
-        User user = null;
-        Employee employee = null;
-        if (userRepository.existsById(ticketDTO.getUserId())) {
-            user = userRepository.findById(ticketDTO.getUserId())
-                    .orElseThrow(() -> new ResourceNotFoundException("User not found"));
+                .orElseThrow( () -> new ResourceNotFoundException("Play not found for this id :: " + ticketDTO.getPlayId()));
+        Employee employee = new Employee();
+        User user = new User();
+        if (ticketDTO.getEmployeeId() != 0) {
+            employee = employeeRepository.findById(ticketDTO.getEmployeeId())
+                    .orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + ticketDTO.getEmployeeId()));
         }
-        if (user == null) {
-            if (employeeRepository.existsById(ticketDTO.getEmployeeId())) {
-                employee = employeeRepository.findById(ticketDTO.getUserId())
-                        .orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
-            }
+        if (ticketDTO.getUserId() != 0) {
+            user = userRepository.findById(ticketDTO.getUserId())
+                    .orElseThrow(() -> new ResourceNotFoundException("User not found" + ticketDTO.getUserId()));
         }
         Ticket ticket = new Ticket();
         ticket.setColumn(ticketDTO.getColumn());
