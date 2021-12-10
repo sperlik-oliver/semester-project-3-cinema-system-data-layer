@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
 
+//TODO make sure u cant create multiple users with the same email
 //TODO soft delete
 //TODO hash passwords
 //TODO sanitize input
@@ -17,7 +18,7 @@ import java.util.Set;
 public class Play {
 
     private long id;
-    private Date date;
+    private String date;
     private int timeInMinutes;
     private double price;
     private Movie movie;
@@ -37,10 +38,10 @@ public class Play {
     }
 
     @Column(name = "date", nullable = false)
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 

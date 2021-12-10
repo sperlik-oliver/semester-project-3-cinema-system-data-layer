@@ -22,7 +22,7 @@ public class Employee {
     private String city;
     private String postcode;
     private String country;
-    private Date birthday;
+    private String birthday;
     private Branch branch;
     private Set<Ticket> soldTickets;
 
@@ -120,10 +120,10 @@ public class Employee {
     }
 
     @Column(name = "birthday", nullable = false)
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
