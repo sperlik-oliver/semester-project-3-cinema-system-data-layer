@@ -20,7 +20,7 @@ public class Play {
     private long id;
     private String date;
     private int timeInMinutes;
-    private double price;
+    private int price;
     private Movie movie;
     private Hall hall;
     private Set<Ticket> tickets;
@@ -54,10 +54,10 @@ public class Play {
     }
 
     @Column(name = "price", nullable = false)
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 

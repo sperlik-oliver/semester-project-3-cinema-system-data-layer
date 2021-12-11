@@ -10,7 +10,7 @@ public class PlayDTO {
     private String date;
     private int timeInMinutes;
     private long movieId;
-    private double price;
+    private int price;
     private long hallId;
 
     public PlayDTO() {
@@ -45,10 +45,10 @@ public class PlayDTO {
         this.hallId = hallId;
     }
 
-    public double getPrice() {
+    public int getPrice() {
         return price;
     }
-    public void setPrice(double price) {
+    public void setPrice(int price) {
         this.price = price;
     }
 }
