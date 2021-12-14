@@ -32,6 +32,7 @@ public class UserController {
 
 	@Autowired
 	private UserRepository userRepository;
+	@Autowired
 	private EmployeeRepository employeeRepository;
 
 	@GetMapping("/users")
@@ -75,9 +76,9 @@ public class UserController {
 		System.out.println();
 		System.out.println();
 		User user = userRepository.getUserByEmail(loginDetails.getEmail());
-		System.out.println(user);
+		System.out.println(user.toString());
 		Employee employee = employeeRepository.getEmployeeByEmail(loginDetails.getEmail());
-		System.out.println(employee);
+		System.out.println(employee.toString());
 			if (user != null) {
 				System.out.println();
 				System.out.println();

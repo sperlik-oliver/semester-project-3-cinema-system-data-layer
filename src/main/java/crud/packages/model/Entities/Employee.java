@@ -145,4 +145,24 @@ public class Employee {
     public void setBranch(Branch branch) {
         this.branch = branch;
     }
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + password + '\'' +
+                ", role=" + role +
+                ", cpr='" + cpr + '\'' +
+                ", street='" + street + '\'' +
+                ", city='" + city + '\'' +
+                ", postcode='" + postcode + '\'' +
+                ", country='" + country + '\'' +
+                ", birthday='" + birthday + '\'' +
+                ", branch=" + branch +
+                ", soldTickets=" + soldTickets +
+                '}';
+    }
 }
