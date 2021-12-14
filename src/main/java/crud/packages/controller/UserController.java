@@ -8,8 +8,11 @@ import javax.validation.Valid;
 import crud.packages.model.DTO.UserDTO;
 
 import crud.packages.model.DTO.Login;
+import crud.packages.model.Entities.Employee;
+import crud.packages.repository.EmployeeRepository;
 import crud.packages.repository.UserRepository;
 import crud.packages.model.Entities.User;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -29,6 +32,7 @@ public class UserController {
 
 	@Autowired
 	private UserRepository userRepository;
+	private EmployeeRepository employeeRepository;
 
 	@GetMapping("/users")
 	public ResponseEntity<List<User>> getAllUsers() {
@@ -62,7 +66,7 @@ public class UserController {
 	}
 
 	@PostMapping("/user/login")
-	public ResponseEntity<User> loginUser(@Valid @RequestBody Login loginDetails) throws ResourceNotFoundException {
+	public ResponseEntity<Object> loginUser(@Valid @RequestBody Login loginDetails) throws ResourceNotFoundException {
 		User user = userRepository.getUserByEmail(loginDetails.getEmail()); {
 			if (user != null) {
 				if (loginDetails.getPassword().equals(user.getPassword())) {
@@ -70,6 +74,14 @@ public class UserController {
 					return ResponseEntity.ok().body(user);
 				}
 				throw new ResourceNotFoundException("Incorrect credentials");
+			} else {
+		Employee employee = employeeRepository.getEmployeeByEmail(loginDetails.getEmail());
+			if (employee != null){
+				if (loginDetails.getPassword().equals(employee.getPassword())){
+					employee.setPassword("");
+					return ResponseEntity.ok().body(employee);
+				}
+			}
 			}
 			throw new ResourceNotFoundException("User not found for this email :: " + loginDetails.getEmail());
 		}
