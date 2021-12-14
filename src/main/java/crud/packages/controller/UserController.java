@@ -77,6 +77,7 @@ public class UserController {
 			} else {
 		Employee employee = employeeRepository.getEmployeeByEmail(loginDetails.getEmail());
 			if (employee != null){
+				System.out.println("We are here");
 				if (loginDetails.getPassword().equals(employee.getPassword())){
 					employee.setPassword("");
 					return ResponseEntity.ok().body(employee);
