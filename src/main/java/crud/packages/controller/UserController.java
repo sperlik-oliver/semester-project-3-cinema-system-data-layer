@@ -76,9 +76,9 @@ public class UserController {
 		System.out.println();
 		System.out.println();
 		User user = userRepository.getUserByEmail(loginDetails.getEmail());
-		System.out.println(user.toString());
+		System.out.println(user);
 		Employee employee = employeeRepository.getEmployeeByEmail(loginDetails.getEmail());
-		System.out.println(employee.toString());
+		System.out.println(employee);
 			if (user != null) {
 				System.out.println();
 				System.out.println();
