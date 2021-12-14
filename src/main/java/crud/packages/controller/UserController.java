@@ -67,27 +67,46 @@ public class UserController {
 
 	@PostMapping("/user/login")
 	public ResponseEntity<Object> loginUser(@Valid @RequestBody Login loginDetails) throws ResourceNotFoundException {
-		User user = userRepository.getUserByEmail(loginDetails.getEmail()); {
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println();
+		System.out.println("We are in login");
+		System.out.println();
+		System.out.println();
+		User user = userRepository.getUserByEmail(loginDetails.getEmail());
+		Employee employee = employeeRepository.getEmployeeByEmail(loginDetails.getEmail());
 			if (user != null) {
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println("We are in user");
+				System.out.println();
+				System.out.println();
 				if (loginDetails.getPassword().equals(user.getPassword())) {
 					user.setPassword("");
 					return ResponseEntity.ok().body(user);
 				}
-				throw new ResourceNotFoundException("Incorrect credentials");
-			} else {
-		Employee employee = employeeRepository.getEmployeeByEmail(loginDetails.getEmail());
-			if (employee != null){
-				System.out.println("We are here");
-				if (loginDetails.getPassword().equals(employee.getPassword())){
+			} else if (employee != null){
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println();
+				System.out.println("We are in employee");
+				System.out.println();
+				System.out.println();
+				if (loginDetails.getPassword().equals(employee.getPassword())) {
 					employee.setPassword("");
 					return ResponseEntity.ok().body(employee);
 				}
+			} else{
+				throw new ResourceNotFoundException("Incorrect Credentials");
 			}
-			}
-			throw new ResourceNotFoundException("User not found for this email :: " + loginDetails.getEmail());
+			return null;
 		}
 
-	}
+
 
 	@PutMapping("/user/edit/{id}")
 	public ResponseEntity<User> updateUser(@PathVariable(value = "id") Long userId,
