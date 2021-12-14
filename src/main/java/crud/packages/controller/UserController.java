@@ -68,43 +68,22 @@ public class UserController {
 
 	@PostMapping("/user/login")
 	public ResponseEntity<Object> loginUser(@Valid @RequestBody Login loginDetails) throws ResourceNotFoundException {
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println();
-		System.out.println("We are in login");
-		System.out.println();
-		System.out.println();
+
 		User user = userRepository.getUserByEmail(loginDetails.getEmail());
-		System.out.println(user);
 		Employee employee = employeeRepository.getEmployeeByEmail(loginDetails.getEmail());
-		System.out.println(employee);
+
 			if (user != null) {
-				System.out.println();
-				System.out.println();
-				System.out.println();
-				System.out.println();
-				System.out.println("We are in user");
-				System.out.println();
-				System.out.println();
 				if (loginDetails.getPassword().equals(user.getPassword())) {
 					user.setPassword("");
 					return ResponseEntity.ok().body(user);
 				}
 			} else if (employee != null){
-				System.out.println();
-				System.out.println();
-				System.out.println();
-				System.out.println();
-				System.out.println("We are in employee");
-				System.out.println();
-				System.out.println();
 				if (loginDetails.getPassword().equals(employee.getPassword())) {
 					employee.setPassword("");
 					return ResponseEntity.ok().body(employee);
 				}
 			} else{
-				throw new ResourceNotFoundException("Incorrect Credentials");
+				return ResponseEntity.badRequest().body("Incorrect credentials");
 			}
 			return null;
 		}
