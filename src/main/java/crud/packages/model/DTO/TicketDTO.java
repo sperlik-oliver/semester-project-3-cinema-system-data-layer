@@ -10,7 +10,6 @@ public class TicketDTO {
 
     private int row;
     private int column;
-    private long userId;
     private long employeeId;
     private long playId;
 
@@ -30,14 +29,6 @@ public class TicketDTO {
     }
     public void setColumn(int column) {
         this.column = column;
-    }
-
-
-    public long getUserId() {
-        return userId;
-    }
-    public void setUserId(long userId) {
-        this.userId = userId;
     }
 
 

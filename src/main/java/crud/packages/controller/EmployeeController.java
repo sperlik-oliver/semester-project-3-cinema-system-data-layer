@@ -5,7 +5,6 @@ import crud.packages.model.DTO.EmployeeDTO;
 import crud.packages.model.DTO.Login;
 import crud.packages.model.Entities.Branch;
 import crud.packages.model.Entities.Employee;
-import crud.packages.model.Entities.User;
 import crud.packages.repository.BranchRepository;
 import crud.packages.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,7 +98,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/employee/login")
-    public ResponseEntity<Employee> loginUser(@Valid @RequestBody Login loginDetails) throws ResourceNotFoundException {
+    public ResponseEntity<Employee> loginEmployee(@Valid @RequestBody Login loginDetails) throws ResourceNotFoundException {
         Employee employee = employeeRepository.getEmployeeByEmail(loginDetails.getEmail()); {
             if (employee != null) {
                 if (loginDetails.getPassword().equals(employee.getPassword())) {

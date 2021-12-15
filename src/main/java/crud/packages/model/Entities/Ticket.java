@@ -13,7 +13,6 @@ public class Ticket {
     private long id;
     private int row;
     private int column;
-    private User user;
     private Employee employee;
     private Play play;
 
@@ -56,16 +55,6 @@ public class Ticket {
         this.employee = employee;
     }
 
-
-    @ManyToOne(optional = true)
-    @JoinColumn(name = "user_id", nullable = true, updatable = true)
-    @JsonIgnoreProperties({"purchasedTickets", "password"})
-    public User getUser() {
-        return user;
-    }
-    public void setUser(User user) {
-        this.user = user;
-    }
 
     @ManyToOne(optional = false)
     @JoinColumn (name = "play_id", nullable = false, updatable = true)
