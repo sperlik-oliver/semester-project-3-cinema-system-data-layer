@@ -2,6 +2,8 @@ package crud.packages.model.Entities;
 
 
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +47,7 @@ public class Movie {
     }
 
     @Column (name = "description", nullable = false)
+    @Type(type="text")
     public String getDescription() {
         return description;
     }
