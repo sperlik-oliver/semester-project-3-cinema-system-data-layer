@@ -68,6 +68,7 @@ public class PlayController {
         play.setTimeInMinutes(playDetails.getTimeInMinutes());
         play.setMovie(movie);
         play.setHall(hall);
+        play.setPrice(playDetails.getPrice());
         final Play updatedPlay = playRepository.save(play);
         return ResponseEntity.ok().body(updatedPlay);
     }
