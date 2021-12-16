@@ -29,7 +29,7 @@ public class Ticket {
         this.id = id;
     }
 
-    @Column(name = "_row", nullable = false)
+    @Column(name = "c_row", nullable = false)
     public int getRow() {
         return row;
     }
@@ -37,7 +37,7 @@ public class Ticket {
         this.row = row;
     }
 
-    @Column(name = "_column", nullable = false)
+    @Column(name = "c_column", nullable = false)
     public int getColumn() {
         return column;
     }
@@ -66,3 +66,6 @@ public class Ticket {
         this.play = play;
     }
 }
+
+
+
