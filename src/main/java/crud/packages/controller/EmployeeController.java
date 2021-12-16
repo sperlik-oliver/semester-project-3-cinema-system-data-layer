@@ -28,7 +28,7 @@ public class EmployeeController {
     public ResponseEntity<List<Employee>> getAllEmployees() {
         List<Employee> employees = new ArrayList<>();
         for (Employee employee : employeeRepository.findAll()) {
-            employee.setPassword("");
+
             employees.add(employee);
         }
         return ResponseEntity.ok().body(employees);
@@ -38,7 +38,7 @@ public class EmployeeController {
     public ResponseEntity<Employee> getEmployee(@PathVariable (value = "id") Long employeeId) throws ResourceNotFoundException {
         Employee employee = employeeRepository.findById(employeeId)
                 .orElseThrow( () -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
-        employee.setPassword("");
+
         return ResponseEntity.ok().body(employee);
     }
 
@@ -60,7 +60,6 @@ public class EmployeeController {
         employee.setBirthday(employeeDTO.getBirthday());
         employee.setBranch(branch);
         employeeRepository.save(employee);
-        employee.setPassword("");
         return ResponseEntity.ok().body(employee);
     }
 
@@ -102,7 +101,6 @@ public class EmployeeController {
         Employee employee = employeeRepository.getEmployeeByEmail(loginDetails.getEmail()); {
             if (employee != null) {
                 if (loginDetails.getPassword().equals(employee.getPassword())) {
-                    employee.setPassword("");
                     return ResponseEntity.ok().body(employee);
                 }
                 throw new ResourceNotFoundException("Incorrect credentials");
