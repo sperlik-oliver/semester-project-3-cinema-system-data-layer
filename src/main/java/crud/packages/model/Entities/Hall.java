@@ -52,7 +52,7 @@ public class Hall {
         this.branch = branch;
     }
 
-    @OneToMany(mappedBy = "hall")
+    @OneToMany(mappedBy = "hall", orphanRemoval = true)
     @JsonIgnoreProperties({"hall", "tickets"})
     public Set<Play> getProgramme() {
         return programme;

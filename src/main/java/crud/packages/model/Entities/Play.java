@@ -80,7 +80,7 @@ public class Play {
         this.hall = hall;
     }
 
-    @OneToMany(mappedBy = "play")
+    @OneToMany(mappedBy = "play", orphanRemoval = true)
     @JsonIgnoreProperties({"play", "user", "employee"})
     public Set<Ticket> getTickets() {
         return tickets;

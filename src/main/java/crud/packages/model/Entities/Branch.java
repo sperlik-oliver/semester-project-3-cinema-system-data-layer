@@ -65,12 +65,12 @@ public class Branch {
         this.country = country;
     }
 
-    @OneToMany(mappedBy = "branch")
+    @OneToMany(mappedBy = "branch", orphanRemoval = true)
     @JsonIgnoreProperties({"branch", "programme"})
     public Set<Hall> getHalls () {return halls;}
     public void setHalls(Set<Hall> halls) {this.halls = halls;}
 
-    @OneToMany(mappedBy = "branch")
+    @OneToMany(mappedBy = "branch", orphanRemoval = false)
     @JsonIgnoreProperties({"branch", "soldTickets", "password"})
     public Set<Employee> getEmployees() {
         return employees;
